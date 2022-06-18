@@ -2,7 +2,7 @@ export class Game {
     public players: string[] = [];
     public stack: string[] = [];
     public playedCards: string[] = [];
-    public currentPlayers: number = 0;
+    public currentPlayer: number = 0;
 
     constructor() {
         for (let i = 0; i < 13; i++) {
@@ -13,8 +13,6 @@ export class Game {
         }
         shuffle(this.stack);
     }
-
-   
 }
 
 function shuffle(array) {
