@@ -2,4 +2,28 @@ body {
     margin: 0;
 }
 html, body { height: 100%; }
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-dialog-container {
+    background: #ffffffd6 !important;
+    color: #000 !important;
+
+    input {
+        color: black !important;
+        &::placeholder {
+            color: black !important;
+          }
+    }
+
+    button {
+        color: #000 !important;
+    }
+}
+// .mat-input-element {
+
+//     &::placeholder {
+//         color: black !important;
+//       }
+//     color: #000 !important;
+// }
