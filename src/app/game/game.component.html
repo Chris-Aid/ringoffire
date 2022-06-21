@@ -3,12 +3,21 @@
 
 <div class="field">
 
+    <!--Card Stack for dealed cards-->
+    <div class="dealedCardsOnTable">
+        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards"
+            [ngStyle]="{'transform': 'rotate('+ (randomMath()) +'deg)'}" (click)="takeCard()" [src]='img' alt="">
+    </div>
+
     <div class="card-stack">
 
         <!--Card Stack-->
-        <img [ngStyle]="{'right.px': i * 5}" *ngFor="let card of [1,2,3,4,5]; let i = index;"
-            src="assets/img/cards/card_cover.png" alt="">
-        <img (click)="takeCard()" class="top-card" style="right: 25px;" src="/assets/img/cards/card_cover.png" alt="">
+        <img *ngFor="let image of game.dealingCards let i = index;" [ngStyle]="{'right.px': i * 0.4}"
+            (click)="takeCard()" [src]='image' alt="">
+
+        <!--top card-->
+        <img id="topCard" (click)="takeCard()" class="dealingCards top-card" style="right: 25px;"
+            src="/assets/img/cards/card_cover.png" alt="">
 
         <!--Stack for played cards-->
         <img class="played-cards" *ngFor="let c of game.playedCards" src="/assets/img/cards/{{ c }}.png" alt="">
@@ -25,4 +34,3 @@
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>
 </div>
-

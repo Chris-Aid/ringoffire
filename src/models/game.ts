@@ -3,6 +3,9 @@ export class Game {
     public stack: string[] = [];
     public playedCards: string[] = [];
     public currentPlayer: number = 0;
+    
+    public dealingCards: string[] = [];
+    public dealedCards: string[] = [];
 
     constructor() {
         for (let i = 1; i < 14; i++) {
@@ -11,6 +14,11 @@ export class Game {
             this.stack.push('clubs_'+ i)
             this.stack.push('diamonds_'+ i)
         }
+
+        for (let i = 0; i < 52; i++) {
+          this.dealingCards.push('/assets/img/cards/card_cover.png');
+        }
+
         shuffle(this.stack);
     }
 }
