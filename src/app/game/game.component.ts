@@ -57,19 +57,28 @@ export class GameComponent implements OnInit {
 
   startDealing() {
     // setTimeout(() => {
-      setInterval(() => {
-        if (this.game.dealingCards.length > 0) {
-          let poppedCard = this.game.dealingCards.pop();
-          this.game.dealedCards.push(poppedCard);
-          console.log(poppedCard)
-        } else {
-          document.getElementById('topCard').style.display = "none";
-        }
-      }, 200);
+    setInterval(() => {
+      if (this.game.dealingCards.length > 0) {
+        let poppedCard = this.game.dealingCards.pop();
+        this.game.dealedCards.push(poppedCard);
+        console.log(poppedCard)
+      } else {
+        document.getElementById('topCard').style.display = "none";
+        // this.designCardsAfterDealing();
+      }
+    }, 200);
     // }, 500);
   }
 
   randomMath() {
-    return 30 *  Math.random();
+    if (this.game.dealedCards.length < 52) {
+      return 30 * Math.random(); 
+    } else {
+      return 10;
+    }
   }
+
+  // designCardsAfterDealing() {
+  //   document.getElementById('card_15').style.left = "32px";
+  // }
 }

@@ -5,8 +5,8 @@
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards"
-            [ngStyle]="{'transform': 'rotate('+ (randomMath()) +'deg)'}" (click)="takeCard()" [src]='img' alt="">
+        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards id_{{i}}"
+            [ngStyle]="{'transform': 'rotate('+ i * randomMath() +'deg)'}" (click)="takeCard()" [src]='img' alt="">
     </div>
 
     <div class="card-stack">
