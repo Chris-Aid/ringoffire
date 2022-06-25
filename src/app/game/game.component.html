@@ -5,14 +5,14 @@
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards id_{{i}}"
-            [ngStyle]="{'transform': 'rotate('+ i * randomMath() +'deg)'}" (click)="takeCard()" [src]='img' alt="">
+        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards"
+            [ngStyle]="addStyleToCards(i)" (click)="takeCard()" [src]='img' alt="">
     </div>
-
+    <!-- [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" -->
     <div class="card-stack">
 
         <!--Card Stack-->
-        <img *ngFor="let image of game.dealingCards let i = index;" [ngStyle]="{'right.px': i * 0.4}"
+        <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" [ngStyle]="{'right.px': i * 0.4}"
             (click)="takeCard()" [src]='image' alt="">
 
         <!--top card-->
@@ -20,7 +20,7 @@
             src="/assets/img/cards/card_cover.png" alt="">
 
         <!--Stack for played cards-->
-        <img class="played-cards" *ngFor="let c of game.playedCards" src="/assets/img/cards/{{ c }}.png" alt="">
+        <img   [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards" *ngFor="let c of game.playedCards let i = index;" src="/assets/img/cards/{{ c }}.png" alt="">
 
         <!--Current card animation-->
         <img *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"

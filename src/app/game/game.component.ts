@@ -56,29 +56,18 @@ export class GameComponent implements OnInit {
   }
 
   startDealing() {
-    // setTimeout(() => {
     setInterval(() => {
       if (this.game.dealingCards.length > 0) {
         let poppedCard = this.game.dealingCards.pop();
         this.game.dealedCards.push(poppedCard);
-        console.log(poppedCard)
       } else {
         document.getElementById('topCard').style.display = "none";
         // this.designCardsAfterDealing();
       }
     }, 200);
-    // }, 500);
   }
 
-  randomMath() {
-    if (this.game.dealedCards.length < 52) {
-      return 30 * Math.random(); 
-    } else {
-      return 10;
-    }
+  addStyleToCards(i) {
+    return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px) ' }
   }
-
-  // designCardsAfterDealing() {
-  //   document.getElementById('card_15').style.left = "32px";
-  // }
 }
