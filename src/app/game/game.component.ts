@@ -25,15 +25,14 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard() {
+  takeCard(i: any) {
     if (!this.pickCardAnimation) {
+      console.log(i)
+      this.game.dealedCards.splice(23, 1);
       this.currentCard = this.game.stack.pop();
 
       console.log(this.game);
       this.pickCardAnimation = true;
-      console.log(this.currentCard);
-
-      // this.game.dealingCards.splice(-1);
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
