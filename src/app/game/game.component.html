@@ -5,8 +5,8 @@
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards id_{{i}}"
-            [ngStyle]="{'transform': 'rotate('+ i * randomMath() +'deg)'}" (click)="takeCard()" [src]='img' alt="">
+        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards" id="card_{{i}}"
+            [ngStyle]="{'transform': 'rotate('+ i * 7 +'deg)'}" (click)="takeCard()" [src]='img' alt="">
     </div>
 
     <div class="card-stack">
@@ -27,9 +27,24 @@
             src="/assets/img/cards/{{ currentCard }}.png" alt="">
     </div>
 
-    <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-    </button>
+    <div>
+        <button mat-button color="warn">Warn</button>
+
+        <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+
+    <!-- <mat-form-field appearance="fill">
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </mat-form-field> -->
 
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>
