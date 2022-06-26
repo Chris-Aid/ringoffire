@@ -25,10 +25,10 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard(i: any) {
+  takeCard(i: number) {
     if (!this.pickCardAnimation) {
       console.log(i)
-      this.game.dealedCards.splice(23, 1);
+      this.game.dealedCards.splice(i, 1);
       this.currentCard = this.game.stack.pop();
 
       console.log(this.game);
