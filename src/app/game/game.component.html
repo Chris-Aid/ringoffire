@@ -11,25 +11,30 @@
         <!--Stack for played cards-->
         <img [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards"
             *ngFor="let c of game.playedCards let i = index;" src="/assets/img/cards/{{ c }}.png" alt="">
-    </div>
 
-    <div class="card-stack">
-
-        <!--Card Stack-->
-        <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" [ngStyle]="{'right.px': i * 0.4}"
-         [src]='image' alt="">
+        <!-- Card Stack -->
+        <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="top-card"
+            [ngStyle]="{'transform': 'translateX('+ i * 0.3 +'px) translateY('+ i * -0.2 +'px)'}" [src]='image' alt="">
 
         <!--top card-->
-        <img id="topCard" class="dealingCards top-card" style="right: 25px;"
-            src="/assets/img/cards/card_cover.png" alt="">
-
-        <!--Current card animation-->
-        <img *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"
-            src="/assets/img/cards/{{ currentCard }}.png" alt="">
+        <img *ngFor="let img of game.dealingCards let i = index;" class="dealingCards top-card"
+            [ngStyle]="styleTopCard(i)" src="/assets/img/cards/card_cover.png" alt="">
     </div>
 
-    <div>
-        <button mat-button color="warn">Warn</button>
+    <!-- <div class="card-stack"> -->
+
+    <!--Current card animation-->
+    <!-- <img *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"
+            src="/assets/img/cards/{{ currentCard }}.png" alt=""> -->
+
+    <!-- </div> -->
+
+    <div class="btn-container">
+        <button mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <span class="material-symbols-outlined">
+                photo
+                </span>
+        </button>
 
         <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
             <mat-icon>add</mat-icon>
@@ -37,15 +42,17 @@
     </div>
 
 
-    <!-- <mat-form-field appearance="fill">
+    <mat-form-field appearance="fill">
         <mat-label>Cars</mat-label>
         <select matNativeControl required>
-          <option value="volvo">Volvo</option>
+            <img src="/assets/img/cards/card_cover.png" alt="">
+            <img src="/assets/img/wood.jpg" alt="">
+          <!-- <option value="volvo">Volvo</option>
           <option value="saab">Saab</option>
           <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
+          <option value="audi">Audi</option> -->
         </select>
-      </mat-form-field> -->
+      </mat-form-field>
 
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>

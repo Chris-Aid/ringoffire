@@ -22,6 +22,7 @@
 }
 
 .top-card {
+    position: absolute;
     cursor: pointer;
     transition: all 100ms ease-in-out;
 
@@ -65,19 +66,18 @@
     right: 0;
 }
 
-.btn-add {
-    position: absolute;
-    bottom: 64px;
-    right: 64px;
-}
-
 .info-card {
     position: absolute;
     width: 70vw;
     bottom: 64px;
 }
 
+.cardStack {
+    position: absolute;
+}
+
 .dealingCards {
+    position: absolute;
     animation: dealingCards 200ms ease-in-out;
     animation-iteration-count: 55;
 }
@@ -95,9 +95,9 @@
         transform: scale(1.5);
     }
 
-    100% {
-        transform: scale(1) translateX(450px) translateY(-80px) rotate(10deg);
-    }
+    // 100% {
+    //     transform: scale(1) translateX(450px) translateY(40px) rotate(10deg);
+    // }
 }
 
 .dealedCardsOnTable {
@@ -112,17 +112,19 @@
 }
 
 .dealedCards {
-position: absolute;
+    position: absolute;
 
-&:hover {
-    filter: brightness(1.5);
-    cursor: pointer;
-    // height: 220px;
-}
-// right: 32px;
-// transform: scale(1.3) translateX(480px) translateY(-180px) rotate(10deg);
+    &:hover {
+        filter: brightness(1.5);
+        cursor: pointer;
+        // height: 220px;
+    }
 }
 
-.card_15 {
-    left: 32px;
+.btn-container {
+    display: flex;
+    gap: 32px;
+    position: absolute;
+    bottom: 64px;
+    right: 64px;
 }

@@ -27,8 +27,8 @@ export class GameComponent implements OnInit {
 
   takeCard(i: number) {
     if (!this.pickCardAnimation) {
-      console.log(i)
-      this.game.dealedCards.splice(i, 1);
+      // console.log(i)
+      // this.game.dealedCards.splice(i, 1);
       this.currentCard = this.game.stack.pop();
 
       console.log(this.game);
@@ -60,7 +60,7 @@ export class GameComponent implements OnInit {
         let poppedCard = this.game.dealingCards.pop();
         this.game.dealedCards.push(poppedCard);
       } else {
-        document.getElementById('topCard').style.display = "none";
+        // document.getElementById('topCard').style.display = "none";
         // this.designCardsAfterDealing();
         // clearInterval(dealCards);
       }
@@ -68,6 +68,12 @@ export class GameComponent implements OnInit {
   }
 
   addStyleToCards(i) {
-    return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px) ' }
+    return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
+  }
+
+  styleTopCard(i) {
+    // return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
+    return { 'transform': 'rotate(410deg) translateX(250px)'};
+
   }
 }
