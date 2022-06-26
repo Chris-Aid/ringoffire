@@ -25,15 +25,14 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard() {
+  takeCard(i: number) {
     if (!this.pickCardAnimation) {
+      console.log(i)
+      this.game.dealedCards.splice(i, 1);
       this.currentCard = this.game.stack.pop();
 
       console.log(this.game);
       this.pickCardAnimation = true;
-      console.log(this.currentCard);
-
-      // this.game.dealingCards.splice(-1);
 
       this.game.currentPlayer++;
       this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
@@ -56,47 +55,19 @@ export class GameComponent implements OnInit {
   }
 
   startDealing() {
-    // setTimeout(() => {
-    let dealCards = setInterval(() => {
+    setInterval(() => {
       if (this.game.dealingCards.length > 0) {
         let poppedCard = this.game.dealingCards.pop();
         this.game.dealedCards.push(poppedCard);
-        console.log(poppedCard)
       } else {
         document.getElementById('topCard').style.display = "none";
-        this.designCardsAfterDealing();
-        clearInterval(dealCards);
+        // this.designCardsAfterDealing();
+        // clearInterval(dealCards);
       }
     }, 200);
-    // }, 500);
   }
 
-  randomMath() {
-    if (this.game.dealedCards.length < 52) {
-      return 30 * Math.random();
-    } else {
-      return 10;
-    }
-  }
-
-  designCardsAfterDealing() {
-
-    console.log('design Here');
-
-    // for (let i = 0; i < this.game.dealedCards.length; i++) {
-    //   let card_i = document.getElementById(`card_` + i);
-    // }
-
-    //   let card1 = document.getElementById('card_1');
-    //   let card51 = document.getElementById('card_1');
-    //   let card50 = document.getElementById('card_1');
-    //   let card49 = document.getElementById('card_1');
-
-
-    //   card1.style.left = "32px";
-    //   card51.style.top = "32px";
-    //   card50.style.top = "32px";
-    //   card49.style.top = "32px";
-    // }
+  addStyleToCards(i) {
+    return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px) ' }
   }
 }
