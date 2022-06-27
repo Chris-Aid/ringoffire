@@ -1,13 +1,13 @@
 <app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
     [ngStyle]="{'top.px': 130 + (i * 90)}" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
 
-    <img class="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
+<img class="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
 <div class="field">
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
         <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards" [ngStyle]="addStyleToCards(i)"
-            (click)="takeCard()" [src]='img' alt="">
+            (click)="takeCard(i)" [src]='img.source' alt="">
 
         <!--Stack for played cards-->
         <img [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards"
@@ -30,21 +30,19 @@
 
     <!-- </div> -->
 
-    <mat-form-field class="ImageFormField" appearance="outline">
-        <mat-label>Backgrounds</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
-              <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40" [src]="images.image">
-                {{images.title}}</span>
-            </mat-option>
-          </mat-select>
-    </mat-form-field>
 
     <div class="btn-container">
-        <button  mat-fab color="warn" aria-label="Example icon button with a home icon">
+        <button mat-fab color="warn" aria-label="Example icon button with a home icon">
             <span class="material-symbols-outlined">
                 photo
             </span>
+            <mat-select>
+                <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
+                    <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
+                            [src]="images.image">
+                        {{images.title}}</span>
+                </mat-option>
+            </mat-select>
         </button>
 
         <button mat-fab color="primary" class="btn-add" (click)="openDialog()">

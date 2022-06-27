@@ -6,7 +6,7 @@ export class Game {
   public currentPlayer: number = 0;
 
   public dealingCards: string[] = [];
-  public dealedCards: string[] = [];
+  public dealedCards = [];
 
   constructor() {
     for (let i = 1; i < 14; i++) {

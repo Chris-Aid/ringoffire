@@ -32,24 +32,35 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard() {
-    // this.game.currentPlayer = 0;
-    if (!this.pickCardAnimation) {
-      // console.log(i)
-      // this.game.dealedCards.splice(i, 1);
-      this.currentCard = this.game.stack.pop();
 
-      console.log(this.game);
-      this.pickCardAnimation = true;
+  takeCard(i: number) {
+    console.log(i);
+    this.game.dealedCards.splice(i, 1)
+    console.log(this.game);
+  }
 
-      this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
 
-      setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
-      }, 1000);
-    }
+  // takeCard() {
+  //   // this.game.currentPlayer = 0;
+  //   if (!this.pickCardAnimation) {
+
+  //     this.currentCard = this.game.stack.pop();
+
+  //     console.log(this.game);
+  //     this.pickCardAnimation = true;
+
+  //     this.nextPlayer();
+
+  //     setTimeout(() => {
+  //       this.game.playedCards.push(this.currentCard);
+  //       this.pickCardAnimation = false;
+  //     }, 1000);
+  //   }
+  // }
+
+  nextPlayer() {
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
   }
 
   openDialog(): void {
@@ -63,16 +74,18 @@ export class GameComponent implements OnInit {
   }
 
   startDealing() {
-    setInterval(() => {
-      if (this.game.dealingCards.length > 0) {
-        let poppedCard = this.game.dealingCards.pop();
-        this.game.dealedCards.push(poppedCard);
-      } else {
-        // document.getElementById('topCard').style.display = "none";
-        // this.designCardsAfterDealing();
-        // clearInterval(dealCards);
-      }
-    }, 200);
+    // if (this.game.currentPlayer > 1) {
+      setInterval(() => {
+        if (this.game.dealingCards.length > 0) {
+          let poppedCard = this.game.dealingCards.pop();
+          this.game.dealedCards.push({ 'source': poppedCard} );
+          console.log(this.game)
+        }
+      }, 200);
+    // } else {
+    //   console.log('error')
+    // }
+
   }
 
   addStyleToCards(i) {

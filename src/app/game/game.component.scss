@@ -127,6 +127,7 @@
 
 .dealedCards {
     position: absolute;
+    height: 160px;
 
     &:hover {
         filter: brightness(1.5);
@@ -137,6 +138,7 @@
 
 .btn-container {
     display: flex;
+    // flex-direction: column;
     gap: 32px;
     position: absolute;
     bottom: 64px;
@@ -146,4 +148,12 @@
 .option-content {
     display: flex !important;
     gap: 12px !important;
+}
+
+.mat-select-arrow {
+    display: none !important;
+}
+
+.mat-select-value {
+    display: none !important;
 }
