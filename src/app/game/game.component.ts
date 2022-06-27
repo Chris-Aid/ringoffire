@@ -12,7 +12,14 @@ export class GameComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
+  x = 1;
 
+  backgroundImages = [
+    {value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg'},
+    {value: '2', title: 'Bright Board', image: '/assets/img/backgrounds/wood-2.jpg'},
+    {value: '3', title: 'Textured Wood', image: '/assets/img/backgrounds/wood-3.jpg'},
+    {value: '4', title: 'Textured Wood dark', image: '/assets/img/backgrounds/wood-4.jpg'},
+  ]
 
   constructor(public dialog: MatDialog) { }
 
@@ -25,7 +32,8 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard(i: number) {
+  takeCard() {
+    // this.game.currentPlayer = 0;
     if (!this.pickCardAnimation) {
       // console.log(i)
       // this.game.dealedCards.splice(i, 1);
@@ -74,6 +82,9 @@ export class GameComponent implements OnInit {
   styleTopCard(i) {
     // return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
     return { 'transform': 'rotate(410deg) translateX(250px)'};
+  }
 
+  changeBackground(value) {
+    this.x = value;
   }
 }

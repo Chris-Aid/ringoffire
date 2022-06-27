@@ -1,10 +1,24 @@
+.backgroundImage {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: -1000;
+}
+
+.ImageFormField {
+    position: absolute;
+    top: 64px;
+    right: 64px;
+}
+
 .field {
     height: 100vh;
     width: 100vw;
     max-width: 100%;
-    background-image: url('/assets/img/wood.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
+    // background-image: url('/assets/img/backgrounds/wood-1.jpg');
+    // background-size: cover;
+    // background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -127,4 +141,9 @@
     position: absolute;
     bottom: 64px;
     right: 64px;
+}
+
+.option-content {
+    display: flex !important;
+    gap: 12px !important;
 }
