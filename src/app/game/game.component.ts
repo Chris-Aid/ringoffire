@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { CheckboxControlValueAccessor } from '@angular/forms';
 
 @Component({
   selector: 'app-game',
@@ -9,10 +11,12 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+  @ViewChild('cardsOnTable') ElementView: ElementRef;
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
   x = 1;
+  
 
   backgroundImages = [
     {value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg'},
@@ -32,31 +36,26 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
+  takeCard(i) {
+    // if (this.game.players.length > 1) {
+      if (!this.pickCardAnimation) {
+        console.log(i);
+        this.pickCardAnimation = true;
+        this.game.dealedCards.splice(i, 1);
+        this.currentCard = this.game.stack.pop();
 
-  takeCard(i: number) {
-    console.log(i);
-    this.game.dealedCards.splice(i, 1)
-    console.log(this.game);
+        this.nextPlayer();
+        this.turnCardAnimation(i);
+  
+        setTimeout(() => {
+          this.game.playedCards.push(this.currentCard);
+          this.pickCardAnimation = false;
+        }, 1000);
+      }
+    // } else {
+    //   console.log('false')
+    // }
   }
-
-
-  // takeCard() {
-  //   // this.game.currentPlayer = 0;
-  //   if (!this.pickCardAnimation) {
-
-  //     this.currentCard = this.game.stack.pop();
-
-  //     console.log(this.game);
-  //     this.pickCardAnimation = true;
-
-  //     this.nextPlayer();
-
-  //     setTimeout(() => {
-  //       this.game.playedCards.push(this.currentCard);
-  //       this.pickCardAnimation = false;
-  //     }, 1000);
-  //   }
-  // }
 
   nextPlayer() {
     this.game.currentPlayer++;
@@ -65,7 +64,6 @@ export class GameComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-
     dialogRef.afterClosed().subscribe(name => {
       if (name && name.length > 0) {
         this.game.players.push(name);
@@ -74,17 +72,18 @@ export class GameComponent implements OnInit {
   }
 
   startDealing() {
-    // if (this.game.currentPlayer > 1) {
       setInterval(() => {
+        // let i = 0;
         if (this.game.dealingCards.length > 0) {
           let poppedCard = this.game.dealingCards.pop();
-          this.game.dealedCards.push({ 'source': poppedCard} );
-          console.log(this.game)
+          this.game.dealedCards.push({ source: poppedCard});
+          // i++;
         }
       }, 200);
-    // } else {
-    //   console.log('error')
-    // }
+  }
+
+  turnCardAnimation(i) {
+    console.log(this.ElementView)
 
   }
 

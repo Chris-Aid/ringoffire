@@ -17,7 +17,7 @@ export class Game {
     }
 
     for (let i = 0; i < 52; i++) {
-      this.dealingCards.push('/assets/img/cards/card_cover.png');
+      this.dealingCards.push('/assets/img/cards/card-cover.jpg');
     }
 
     for (let i = 0; i < 52; i++) {

@@ -5,8 +5,8 @@
 <div class="field">
 
     <!--Card Stack for dealed cards-->
-    <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" class="dealedCards" [ngStyle]="addStyleToCards(i)"
+    <div #cardsOnTable class="dealedCardsOnTable">
+        <img *ngFor="let img of game.dealedCards let i = index;" id="card_{{i}}" class="dealedCards" [ngStyle]="addStyleToCards(i)"
             (click)="takeCard(i)" [src]='img.source' alt="">
 
         <!--Stack for played cards-->
@@ -14,15 +14,15 @@
             *ngFor="let c of game.playedCards let i = index;" src="/assets/img/cards/{{ c }}.png" alt="">
 
         <!-- Card Stack -->
-        <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="top-card"
+        <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="card-stack"
             [ngStyle]="{'transform': 'translateX('+ i * 0.3 +'px) translateY('+ i * -0.2 +'px)'}" [src]='image' alt="">
 
         <!--top card-->
-        <img *ngFor="let img of game.dealingCards let i = index;" class="dealingCards top-card"
-            [ngStyle]="styleTopCard(i)" src="/assets/img/cards/card_cover.png" alt="">
+        <img *ngFor="let img of game.dealingCards let i = index;" class="dealingCards card-stack"
+            [ngStyle]="styleTopCard(i) " src="/assets/img/cards/card-cover.jpg" alt="">
     </div>
 
-    <!-- <div class="card-stack"> -->
+    <!-- <div class="cardStack"> -->
 
     <!-- Current card animation-->
     <!-- <img *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"

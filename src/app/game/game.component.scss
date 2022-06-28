@@ -24,7 +24,7 @@
     align-items: center;
 }
 
-.card-stack {
+.cardStack {
     position: absolute;
     left: 128px;
     width: 160px;
@@ -35,13 +35,14 @@
     }
 }
 
-.top-card {
+.card-stack {
     position: absolute;
     cursor: pointer;
     transition: all 100ms ease-in-out;
+    width: 180px;
 
     &:hover {
-        transform: scale(1.1) translateY(-10px);
+        transform: scale(1.1) translateY(-10px) rotate(130deg);
     }
 }
 
@@ -127,7 +128,9 @@
 
 .dealedCards {
     position: absolute;
-    height: 160px;
+    width: 180px;
+    border-radius: 6%;
+    box-shadow: 1px -1px #000000;
 
     &:hover {
         filter: brightness(1.5);
