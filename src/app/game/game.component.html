@@ -7,7 +7,7 @@
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
         <img *ngFor="let img of game.dealedCards let i = index;" #imgElement id="card_{{i}}" class="dealedCards" [ngStyle]="addStyleToCards(i)"
-            (click)="takeCard(imgElement)" [src]='img.source' alt="">
+            (click)="takeCard(imgElement, i)" [src]='img.source' alt="">
 
         <!--Stack for played cards-->
         <img [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards"
@@ -22,15 +22,7 @@
             [ngStyle]="styleTopCard(i) " src="/assets/img/cards/card-cover.jpg" alt="">
     </div>
 
-    <!-- <div class="cardStack"> -->
-
-    <!-- Current card animation-->
-    <!-- <img *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"
-            src="/assets/img/cards/{{ currentCard }}.png" alt=""> -->
-
-    <!-- </div> -->
-
-
+    <!--button for selicting a background image-->
     <div class="btn-container">
         <button mat-fab color="warn" aria-label="Example icon button with a home icon">
             <span class="material-symbols-outlined">
@@ -45,6 +37,7 @@
             </mat-select>
         </button>
 
+        <!--button to enter names of players-->
         <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
             <mat-icon>add</mat-icon>
         </button>
