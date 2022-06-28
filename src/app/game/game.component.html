@@ -5,9 +5,9 @@
 <div class="field">
 
     <!--Card Stack for dealed cards-->
-    <div #cardsOnTable class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" id="card_{{i}}" class="dealedCards" [ngStyle]="addStyleToCards(i)"
-            (click)="takeCard(i)" [src]='img.source' alt="">
+    <div class="dealedCardsOnTable">
+        <img *ngFor="let img of game.dealedCards let i = index;" #imgElement id="card_{{i}}" class="dealedCards" [ngStyle]="addStyleToCards(i)"
+            (click)="takeCard(imgElement)" [src]='img.source' alt="">
 
         <!--Stack for played cards-->
         <img [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards"
@@ -15,7 +15,7 @@
 
         <!-- Card Stack -->
         <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="card-stack"
-            [ngStyle]="{'transform': 'translateX('+ i * 0.3 +'px) translateY('+ i * -0.2 +'px)'}" [src]='image' alt="">
+            [ngStyle]="{'transform': ' rotate(90deg) translateX('+ i * -0.4 +'px) translateY('+ i * -0.3 +'px)'}" [src]='image' alt="">
 
         <!--top card-->
         <img *ngFor="let img of game.dealingCards let i = index;" class="dealingCards card-stack"

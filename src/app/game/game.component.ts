@@ -36,16 +36,15 @@ export class GameComponent implements OnInit {
     this.game = new Game;
   }
 
-  takeCard(i) {
+  takeCard(imgElement) {
     // if (this.game.players.length > 1) {
       if (!this.pickCardAnimation) {
-        console.log(i);
+
         this.pickCardAnimation = true;
-        this.game.dealedCards.splice(i, 1);
         this.currentCard = this.game.stack.pop();
 
         this.nextPlayer();
-        this.turnCardAnimation(i);
+        this.turnCardAnimation(imgElement);
   
         setTimeout(() => {
           this.game.playedCards.push(this.currentCard);
@@ -79,11 +78,17 @@ export class GameComponent implements OnInit {
           this.game.dealedCards.push({ source: poppedCard});
           // i++;
         }
-      }, 200);
+      }, 100);
   }
 
-  turnCardAnimation(i) {
-    console.log(this.ElementView)
+  turnCardAnimation(imgElement) {
+
+    imgElement.style.transform = 'translateY(0px) translateX(0px) rotate(0deg)';
+    imgElement.classList.add('turnCardAnimation');
+    setTimeout(() => {
+      imgElement.remove();
+    }, 1000);
+
 
   }
 
@@ -93,7 +98,7 @@ export class GameComponent implements OnInit {
 
   styleTopCard(i) {
     // return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
-    return { 'transform': 'rotate(410deg) translateX(250px)'};
+    return { 'transform': 'rotate(0deg) translateX(250px)'};
   }
 
   changeBackground(value) {
