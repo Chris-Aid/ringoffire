@@ -6,8 +6,8 @@
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" #imgElement id="card_{{i}}" class="dealedCards" [ngStyle]="addStyleToCards(i)"
-            (click)="takeCard(imgElement, i)" [src]='img.source' alt="">
+        <img *ngFor="let img of game.dealedCards let i = index;" #imgElement class="dealedCards" [ngStyle]="addStyleToCards(i)"
+         (click)="takeCard(imgElement, i)" [src]='img.source' alt="">
 
         <!--Stack for played cards-->
         <img [ngStyle]="{'transform': 'rotate('+ 180 * this.game.randomNumber[i] +'deg)'}" class="played-cards"
@@ -17,9 +17,9 @@
         <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="card-stack"
             [ngStyle]="{'transform': ' rotate(90deg) translateX('+ i * -0.4 +'px) translateY('+ i * -0.3 +'px)'}" [src]='image' alt="">
 
-        <!--top card-->
-        <img class="dealingCards card-stack"
-            [ngStyle]="styleTopCard() " src="/assets/img/cards/card-cover.jpg" alt="">
+        <!-- top card -->
+        <img #topCard class="dealingCards card-stack"
+         src="/assets/img/cards/card-cover.jpg" alt="">
     </div>
 
     <!--button for selicting a background image-->
