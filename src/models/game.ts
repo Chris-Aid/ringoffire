@@ -3,6 +3,7 @@ export class Game {
   public stack: string[] = [];
   public playedCards: string[] = [];
   public randomNumber: number[] = [];
+  public roationOfCards: number[] = [];
   public currentPlayer: number = 0;
 
   public dealingCards: string[] = [];
@@ -16,6 +17,8 @@ export class Game {
       this.stack.push('diamonds_' + i)
     }
 
+    shuffle(this.stack);
+
     for (let i = 0; i < 52; i++) {
       this.dealingCards.push('/assets/img/cards/card-cover.jpg');
     }
@@ -24,7 +27,10 @@ export class Game {
       this.randomNumber.push(Math.random());
     }
 
-    shuffle(this.stack);
+    for (let i = 0; i < 52; i++) {
+      this.roationOfCards.push(i * 1);
+    }
+
   }
 }
 

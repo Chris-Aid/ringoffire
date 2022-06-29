@@ -18,8 +18,8 @@
             [ngStyle]="{'transform': ' rotate(90deg) translateX('+ i * -0.4 +'px) translateY('+ i * -0.3 +'px)'}" [src]='image' alt="">
 
         <!--top card-->
-        <img *ngFor="let img of game.dealingCards let i = index;" class="dealingCards card-stack"
-            [ngStyle]="styleTopCard(i) " src="/assets/img/cards/card-cover.jpg" alt="">
+        <img class="dealingCards card-stack"
+            [ngStyle]="styleTopCard() " src="/assets/img/cards/card-cover.jpg" alt="">
     </div>
 
     <!--button for selicting a background image-->

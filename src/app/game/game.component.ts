@@ -40,6 +40,7 @@ export class GameComponent implements OnInit {
     // if (this.game.players.length > 1) {
       if (!this.pickCardAnimation) {
 
+        console.log(this.game);
         this.pickCardAnimation = true;
         this.currentCard = this.game.stack.pop();
 
@@ -72,23 +73,24 @@ export class GameComponent implements OnInit {
 
   startDealing() {
       setInterval(() => {
-        // let i = 0;
         if (this.game.dealingCards.length > 0) {
           let poppedCard = this.game.dealingCards.pop();
           this.game.dealedCards.push({ source: poppedCard});
-          // i++;
         }
       }, 200);
   }
 
   turnCardAnimation(imgElement, i) {
 
-    imgElement.style.transform = 'rotate('+ i * 10 +'deg) translateY(0px) translateX(0px)';
+    // document.querySelector(`[id='card_{{i}}'] .turnCardAnimation`).style.setProperty('transform: rotate('+ i * 10 +'deg)  scale(1) translateX(250px)');
+    // (document.querySelector('.turnCardAnimation') as CSSKeyframesRule).style.transform = 'rotate('+ i * 10 +'deg) translateX(250px)';
+
+    imgElement.style.transform = 'rotate('+ i * 10 +'deg) translateX(250px)';
     console.log(i)
     imgElement.classList.add('turnCardAnimation');
     setTimeout(() => {
       imgElement.remove();
-    }, 600);
+    }, 8000);
 
 
   }
@@ -97,9 +99,9 @@ export class GameComponent implements OnInit {
     return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
   }
 
-  styleTopCard(i) {
-    // return {'transform': 'rotate('+ i * 10 +'deg)  translateX('+ 250 +'px)' }
-    return { 'transform': 'rotate(0deg) translateX(250px)'};
+  styleTopCard() {
+    let i = 30;
+    return { 'transform': 'rotate('+i* 10+'deg) translateX(250px)'};
   }
 
   changeBackground(value) {
