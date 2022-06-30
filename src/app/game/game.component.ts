@@ -74,7 +74,7 @@ export class GameComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
-      }, 600);
+      }, 1000);
     }
     // } else {
     //   console.log('false')
@@ -105,12 +105,25 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
 
+  newItem = [];
+
   turnCardAnimation(imgElement, i) {
 
     let style = getComputedStyle(imgElement);
     let CardMatrix = style.transform;
-    // imgElement.style.transform = style.transform;
 
+    this.getRotationOfMatrix(CardMatrix, i);
+
+    imgElement.classList.add('turnCardAnimation');
+    setTimeout(() => {
+      imgElement.remove();
+      // let styleOfCard = getComputedStyle(imgElement);
+      // let matrix = styleOfCard.transform;
+      // this.game.randomNumber.push(matrix);
+    }, 1000);
+  }
+
+  getRotationOfMatrix(CardMatrix , i) {
     var values = CardMatrix.split('(')[1],
       firstValues = values.split(')')[0],
       myValue = firstValues.split(',');
@@ -122,18 +135,11 @@ export class GameComponent implements OnInit, AfterViewInit {
     var c = myValue[2]; // -0.5
     var d = myValue[3]; // 0.866025
 
-    console.log(b)
-
     // put variable 'b' to Math.asin function
-    var angle = Math.round(Math.asin(0.5) * (180 / Math.PI));
+    var angle = Math.round(Math.asin(b) * (180 / Math.PI));
     console.log(angle);
 
-    imgElement.style.setProperty('rotation', angle + "deg");
-    imgElement.classList.add('turnCardAnimation');
-    setTimeout(() => {
-      imgElement.remove();
-    }, 8000);
-
+    document.documentElement.style.setProperty('rotation', angle + "deg");
 
   }
 

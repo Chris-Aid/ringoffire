@@ -46,7 +46,7 @@
 }
 
 .played-cards {
-    transform: scale(1.3) translateX(480px) translateY(-180px) rotate(10deg);
+    // transform: scale(1.3) translateX(480px) translateY(-180px) rotate(10deg);
     position: absolute;
     height: 180px;
 }
@@ -112,9 +112,9 @@
 }
 
 .turnCardAnimation {
-    animation: turnCard 8000ms ease-in-out;
+    animation: turnCard 1000ms ease-in-out;
     z-index: 8000;
-    
+
 }
 
 @keyframes turnCard {
@@ -127,7 +127,7 @@
     }
 
     100% {
-        transform:  rotate(var(rotation)) scale(1) translateX(0px);
+        transform: rotate(var(rotation)) scale(1) translateX(0px);
     }
 }
 
