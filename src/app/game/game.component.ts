@@ -1,26 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { CheckboxControlValueAccessor } from '@angular/forms';
+
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
+
+
 export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('cardsOnTable') ElementView: ElementRef;
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
+
 
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
   x = 1;
   clockwise = false;
-
+  addPlayers = 'hello'
 
   backgroundImages = [
     { value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg' },
@@ -62,25 +65,25 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   takeCard(imgElement, i) {
-    // if (this.game.players.length > 1) {
-    if (!this.pickCardAnimation) {
+    if (this.game.players.length > 1) {
+      if (!this.pickCardAnimation) {
 
-      console.log(this.game);
-      this.pickCardAnimation = true;
-      this.currentCard = this.game.stack.pop();
+        console.log(this.game);
+        this.pickCardAnimation = true;
+        this.currentCard = this.game.stack.pop();
 
-      this.nextPlayer();
-      this.turnCardAnimation(imgElement, i);
+        this.nextPlayer();
+        this.turnCardAnimation(imgElement, i);
 
-      setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
-        this.pickCardAnimation = false;
-        // this.playedCard.classList.add('played-cards');
-      }, 600);
+        setTimeout(() => {
+          this.game.playedCards.push(this.currentCard);
+          this.pickCardAnimation = false;
+          // this.playedCard.classList.add('played-cards');
+        }, 600);
+      }
+    } else {
+      this.addPlayers = 'Please add at least two players bofore you pick a card!'
     }
-    // } else {
-    //   console.log('false')
-    // }
   }
 
   nextPlayer() {
@@ -115,7 +118,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   }
 
-  getRotationOfMatrix(CardMatrix , i) {
+  getRotationOfMatrix(CardMatrix, i) {
     var values = CardMatrix.split('(')[1],
       firstValues = values.split(')')[0],
       myValue = firstValues.split(',');
@@ -135,7 +138,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   randomRotation(i) {
-     return {'transform': 'rotate(' + this.game.randomNumber[i] * 180 + 'deg)'} 
+    return { 'transform': 'rotate(' + this.game.randomNumber[i] * 180 + 'deg)' }
   }
 
   addStyleToCards(i) {
@@ -154,4 +157,9 @@ export class GameComponent implements OnInit, AfterViewInit {
       }
     });
   }
+}
+
+export class GameInfoComponent {
+
+  title = 'hello';
 }
