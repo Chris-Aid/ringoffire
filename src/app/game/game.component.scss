@@ -1,3 +1,7 @@
+// :root {
+//     --my-variable-rotation: 10deg;
+// }
+
 .backgroundImage {
     height: 100vh;
     width: 100%;
@@ -46,9 +50,20 @@
 }
 
 .played-cards {
-    // transform: scale(1.3) translateX(480px) translateY(-180px) rotate(10deg);
     position: absolute;
     height: 180px;
+    animation: rotateCard 200ms ease-out;
+    box-shadow: 1px -1px #4f4f4f;
+    border-radius: 5px;
+}
+
+@keyframes rotateCard {
+    0%{
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotate(var(random)) rotateY(0deg);
+    }
 }
 
 .player-postition {
@@ -84,8 +99,6 @@
     50% {
         transform: translateX(20px) translateY(-20px) rotate(90deg) scale(1.3);
     }
-
-
 }
 
 .dealedCardsOnTable {
@@ -95,8 +108,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-
-
 }
 
 .dealedCards {
@@ -112,22 +123,21 @@
 }
 
 .turnCardAnimation {
-    animation: turnCard 1000ms ease-in-out;
+    animation: turnCard 600ms ease-in-out;
     z-index: 8000;
-
 }
 
 @keyframes turnCard {
     0% {
-        transform: rotate(var(rotation)) scale(1) translateX(250px);
+        transform: rotateX(90deg) rotateY(90deg) rotate(angle)  scale(1) translateX(250px);
     }
 
     50% {
-        transform: rotate(var(rotation)) scale(1.3) translateX(400px);
+        transform: rotateX(90deg) rotateY(90deg) rotate(angle) scale(1.3) translateX(400px);
     }
 
     100% {
-        transform: rotate(var(rotation)) scale(1) translateX(0px);
+        transform: rotateX(90deg) rotateY(90deg) translateX(0px);
     }
 }
 

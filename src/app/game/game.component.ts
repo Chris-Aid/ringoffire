@@ -13,6 +13,7 @@ import { CheckboxControlValueAccessor } from '@angular/forms';
 export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('cardsOnTable') ElementView: ElementRef;
   @ViewChild('topCard') topCard: ElementRef;
+  @ViewChild('playedCard') playedCard: ElementRef;
 
   pickCardAnimation = false;
   currentCard: string = '';
@@ -74,7 +75,8 @@ export class GameComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
-      }, 1000);
+        // this.playedCard.classList.add('played-cards');
+      }, 600);
     }
     // } else {
     //   console.log('false')
@@ -84,15 +86,6 @@ export class GameComponent implements OnInit, AfterViewInit {
   nextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe(name => {
-      if (name && name.length > 0) {
-        this.game.players.push(name);
-      }
-    });
   }
 
   startDealing() {
@@ -115,12 +108,11 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.getRotationOfMatrix(CardMatrix, i);
 
     imgElement.classList.add('turnCardAnimation');
+
     setTimeout(() => {
       imgElement.remove();
-      // let styleOfCard = getComputedStyle(imgElement);
-      // let matrix = styleOfCard.transform;
-      // this.game.randomNumber.push(matrix);
-    }, 1000);
+    }, 2000);
+
   }
 
   getRotationOfMatrix(CardMatrix , i) {
@@ -140,7 +132,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     console.log(angle);
 
     document.documentElement.style.setProperty('rotation', angle + "deg");
+  }
 
+  randomRotation(i) {
+     return {'transform': 'rotate(' + this.game.randomNumber[i] * 180 + 'deg)'} 
   }
 
   addStyleToCards(i) {
@@ -149,5 +144,14 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   changeBackground(value) {
     this.x = value;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
+    dialogRef.afterClosed().subscribe(name => {
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
+    });
   }
 }
