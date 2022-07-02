@@ -22,26 +22,27 @@
         <img #topCard class="dealingCards card-stack" src="/assets/img/cards/card-cover.jpg" alt="">
     </div>
 
-    <!--button for selicting a background image-->
-    <div class="btn-container">
-        <button mat-fab color="warn" aria-label="Example icon button with a home icon">
-            <span class="material-symbols-outlined">
-                photo
-            </span>
-            <mat-select>
-                <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
-                    <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
-                            [src]="images.image">
-                        {{images.title}}</span>
-                </mat-option>
-            </mat-select>
-        </button>
 
-        <!--button to enter names of players-->
-        <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
+        <!--button for selicting a background image-->
+        <!-- <div class="btn-container"> -->
+            <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
+                <span class="material-symbols-outlined">
+                    photo
+                </span>
+                <mat-select>
+                    <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
+                        <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
+                                [src]="images.image">
+                            {{images.title}}</span>
+                    </mat-option>
+                </mat-select>
+            </button>
+    
+            <!--button to enter names of players-->
+            <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
+                <mat-icon>add</mat-icon>
+            </button>
+        <!-- </div> -->
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>
 </div>
