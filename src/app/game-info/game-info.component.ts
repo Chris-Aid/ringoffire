@@ -24,7 +24,7 @@ export class GameInfoComponent implements OnInit {
   ];
 
   @Input() title = '';
-  @Input()description = '';
+  @Input() description = '';
   @Input() card: string;
   constructor() { }
 

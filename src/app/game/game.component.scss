@@ -143,10 +143,24 @@
 
 .btn-container {
     display: flex;
+    height: 100vh;
+    width: 100vw;
     gap: 32px;
     position: absolute;
+    // bottom: 64px;
+    // right: 64px;
+}
+
+.btn-add {
+    position: absolute;
     bottom: 64px;
-    right: 64px;
+    right: 32px;
+}
+
+.btn-selectImg {
+    position: absolute;
+    bottom: 64px;
+    right: 96px;
 }
 
 .option-content {
