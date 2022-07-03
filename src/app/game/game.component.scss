@@ -147,8 +147,6 @@
     width: 100vw;
     gap: 32px;
     position: absolute;
-    // bottom: 64px;
-    // right: 64px;
 }
 
 .btn-add {
@@ -174,4 +172,12 @@
 
 .mat-select-value {
     display: none !important;
+}
+
+.subtitle-imageSelector {
+color: white;
+margin-top: 8px;
+margin-bottom: 8px;
+padding-left: 16px;
+
 }
