@@ -30,6 +30,7 @@
                     photo
                 </span>
                 <mat-select>
+                    <div><h2 class="subtitle-imageSelector">Select a table!</h2></div>
                     <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
                         <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
                                 [src]="images.image">
