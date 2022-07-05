@@ -17,7 +17,8 @@ export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
 
-  @Input() avatarValue: any;
+  // @Input() avatarValue: any;
+  // avatarValue;
 
   pickCardAnimation = false;
   currentCard: string = '';
@@ -55,22 +56,29 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   }
 
+  // passValueOfAvatar(value) {
+  //   setInterval(() => {
+  //     console.log(value)
+  //   }, 100);
+  // }
+
+
 
   ngOnInit(): void {
     this.startDealing();
     this.newGame();
-    console.log(this.avatarValue);
   }
 
   newGame() {
     this.game = new Game;
+
   }
 
   takeCard(imgElement, i) {
     if (this.game.players.length > 1) {
       if (!this.pickCardAnimation) {
 
-        console.log(this.game);
+        // console.log(this.avatarValue);
         this.pickCardAnimation = true;
         this.currentCard = this.game.stack.pop();
 
@@ -87,11 +95,6 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.addPlayers = 'Please add at least two players bofore you pick a card!'
     }
   }
-
-  // safeValue(value) {
-  //   this.avatarValue = value;
-  //   console.log(this.avatarValue)
-  // }
 
   nextPlayer() {
     this.game.currentPlayer++;
@@ -139,8 +142,6 @@ export class GameComponent implements OnInit, AfterViewInit {
 
     // put variable 'b' to Math.asin function
     var angle = Math.round(Math.asin(b) * (180 / Math.PI));
-    console.log(angle);
-
     document.documentElement.style.setProperty('rotation', angle + "deg");
   }
 

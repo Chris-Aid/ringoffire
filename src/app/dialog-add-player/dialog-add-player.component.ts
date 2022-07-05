@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-dialog-add-player',
@@ -7,27 +8,33 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog-add-player.component.scss']
 })
 export class DialogAddPlayerComponent implements OnInit {
-  @Output() avatarValue = 1;
+
+  avatarValue;
+  // @Output() passValueOfAvatar: EventEmitter<any> = new EventEmitter();
+
   avatarImages = [
-    { value: '1', image: '/assets/img/avatar/avatar-1.jpg' },
-    { value: '2', image: '/assets/img/avatar/avatar-2.jpg' },
-    { value: '3', image: '/assets/img/avatar/avatar-3.jpg' },
+    { value: '1', image: '/assets/img/avatar/avatar-1.png' },
+    { value: '2', image: '/assets/img/avatar/avatar-2.png' },
+    { value: '3', image: '/assets/img/avatar/avatar-3.png' },
+    { value: '4', image: '/assets/img/avatar/avatar-4.png' },
+    { value: '5', image: '/assets/img/avatar/avatar-5.png' },
   ];
 
   name: string = '';
   disableSelect = true;
-  
+
   constructor(
     public dialogRef: MatDialogRef<DialogAddPlayerComponent>) { }
 
   ngOnInit(): void {
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   safeValue(value) {
     this.avatarValue = value;
+   console.log(this.avatarValue)
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close(this.avatarValue);
   }
 }
