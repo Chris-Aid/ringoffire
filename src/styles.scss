@@ -17,10 +17,9 @@ body {
     // color: #000 !important;
 
     input {
-        color: black !important;
 
         &::placeholder {
-            color: black !important;
+            color: white !important;
         }
     }
 }
@@ -40,7 +39,7 @@ body {
     border-radius: 100% !important;
     left: 0 !important;
     top: 0 !important;
-    z-index: 10000 !important;
+    z-index: 1000000000 !important;
 }
 
 .ng-tigger {
@@ -48,6 +47,7 @@ body {
     transform-origin: 0 !important;
     top: 0 !important;
     left: 0 !important;
+    z-index: 1000000000 !important;
 
     p {
         font-size: 15px;
@@ -71,7 +71,7 @@ body {
 }
 
 .cdk-overlay-pane {
-    position: relative;
+    position: static;
     bottom: 0px !important;
     left: 0px !important;
     transform: translateX(0px) !important;

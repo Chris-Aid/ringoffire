@@ -5,6 +5,17 @@
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="name">
   </mat-form-field>
+  <!-- <mat-form-field appearance="fill"> -->
+  <mat-label>Choose an avatar</mat-label>
+  <!-- <mat-select > -->
+  <div class="avatarForm">
+    <mat-option *ngFor="let images of avatarImages" [value]="images.value" >
+      <img (click)="safeValue(images.value)" class="avatarImage" [src]="images.image">
+    </mat-option>
+  </div>
+
+  <!-- </mat-select> -->
+  <!-- </mat-form-field> -->
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

@@ -1,7 +1,7 @@
 <app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
     [ngStyle]="{'top.px': 130 + (i * 90)}" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
 
-<img class="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
+<img class="backgroundImage" id="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
 <div class="field">
 
     <!--Card Stack for dealed cards-->

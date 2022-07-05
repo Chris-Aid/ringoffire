@@ -7,7 +7,7 @@
     width: 100%;
     object-fit: cover;
     position: absolute;
-    z-index: -1000;
+    z-index: -10000000;
 }
 
 .ImageFormField {
@@ -152,13 +152,13 @@
 .btn-add {
     position: absolute;
     bottom: 64px;
-    right: 32px;
+    right: 48px;
 }
 
 .btn-selectImg {
     position: absolute;
     bottom: 64px;
-    right: 96px;
+    right: 128px;
 }
 
 .option-content {

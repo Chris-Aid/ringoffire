@@ -1,0 +1,26 @@
+.mat-dialog-content {
+
+    display: flex;
+    flex-direction: column !important;
+
+}
+
+.mat-option {
+    height: auto !important;
+    line-height: 0px !important;
+    padding: 12px;
+}
+
+
+.avatarForm {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.avatarImage {
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+}

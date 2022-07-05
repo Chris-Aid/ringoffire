@@ -24,7 +24,8 @@ export class Game {
     }
 
     for (let i = 0; i < 52; i++) {
-      this.randomNumber.push(Math.random());
+      var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+      this.randomNumber.push(plusOrMinus * Math.random());
     }
 
     for (let i = 0; i < 52; i++) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -17,6 +17,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
 
+  @Input() avatarValue: any;
 
   pickCardAnimation = false;
   currentCard: string = '';
@@ -58,6 +59,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.startDealing();
     this.newGame();
+    console.log(this.avatarValue);
   }
 
   newGame() {
@@ -85,6 +87,11 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.addPlayers = 'Please add at least two players bofore you pick a card!'
     }
   }
+
+  // safeValue(value) {
+  //   this.avatarValue = value;
+  //   console.log(this.avatarValue)
+  // }
 
   nextPlayer() {
     this.game.currentPlayer++;
@@ -114,7 +121,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       imgElement.remove();
-    }, 2000);
+    }, 600);
 
   }
 
@@ -123,7 +130,7 @@ export class GameComponent implements OnInit, AfterViewInit {
       firstValues = values.split(')')[0],
       myValue = firstValues.split(',');
 
-    //matrix just contains sin and cos
+    //matrix just contains sin and cos - only var v is used for generating rotation
 
     var a = myValue[0]; // 0.866025
     var b = myValue[1]; // 0.5
@@ -138,7 +145,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   randomRotation(i) {
-    return { 'transform': 'rotate(' + this.game.randomNumber[i] * 180 + 'deg)' }
+    return { 'transform': 'rotate(' + this.game.randomNumber[i] * 15 + 'deg)' }
   }
 
   addStyleToCards(i) {
@@ -159,7 +166,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 }
 
-export class GameInfoComponent {
+// export class GameInfoComponent {
 
-  title = 'hello';
-}
+//   title = 'hello';
+// }
