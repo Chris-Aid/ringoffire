@@ -1,7 +1,3 @@
-// :root {
-//     --my-variable-rotation: 10deg;
-// }
-
 .backgroundImage {
     height: 100vh;
     width: 100%;
@@ -58,9 +54,10 @@
 }
 
 @keyframes rotateCard {
-    0%{
+    0% {
         transform: rotateY(90deg);
     }
+
     100% {
         transform: rotate(var(random)) rotateY(0deg);
     }
@@ -129,7 +126,7 @@
 
 @keyframes turnCard {
     0% {
-        transform: rotateX(90deg) rotateY(90deg) rotate(angle)  scale(1) translateX(250px);
+        transform: rotateX(90deg) rotateY(90deg) rotate(angle) scale(1) translateX(250px);
     }
 
     50% {
@@ -139,14 +136,6 @@
     100% {
         transform: rotateX(90deg) rotateY(90deg) translateX(0px);
     }
-}
-
-.btn-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    gap: 32px;
-    position: absolute;
 }
 
 .btn-add {
@@ -175,9 +164,119 @@
 }
 
 .subtitle-imageSelector {
-color: white;
-margin-top: 8px;
-margin-bottom: 8px;
-padding-left: 16px;
+    color: white;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-left: 16px;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 340px) {
+    .dealedCards {
+        width: 100px;
+    }
+
+    .card-stack {
+        width: 100px;
+    }
+
+    .played-cards {
+        height: 100px;
+    }
+
+    .info-card {
+        width: 90vw;
+        bottom: 96px;
+    }
+
+    .player-postition {
+        right: auto !important;
+    }
+
+    .btn-container {
+        display: flex;
+        position: absolute;
+        bottom: 24px;
+        gap: 24px;
+    }
+
+    .btn-selectImg {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+
+    .btn-add {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
 
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 340px) {
+    .dealedCards {
+        width: 100px;
+    }
+
+    .card-stack {
+        width: 100px;
+    }
+
+    .played-cards {
+        height: 100px;
+    }
+
+    .info-card {
+        width: 90vw;
+        bottom: 96px;
+    }
+
+    .player-postition {
+        right: auto !important;
+    }
+
+    .btn-container {
+        display: flex;
+        position: absolute;
+        bottom: 24px;
+        gap: 24px;
+    }
+
+    .btn-selectImg {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+
+    .btn-add {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 450px) {
+    .dealedCards {
+        width: 120px;
+    }
+
+    .card-stack {
+        width: 120px;
+    }
+
+    .played-cards {
+        height: 120px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {}

@@ -13,8 +13,9 @@
 
 
 .avatarForm {
+    max-width: 235px !important;
     display: flex;
-    flex-direction: row !important;
+    flex-wrap: wrap;
     align-items: center !important;
     justify-content: center !important;
 }
@@ -24,3 +25,11 @@
     width: 50px;
     border-radius: 100%;
 }
+
+.mat-select-panel {
+    min-width: 100% !important;
+    transform: translateX(-16px) translateY(-20px) !important;
+    display: flex;
+    flex-wrap: wrap !important;
+}
+

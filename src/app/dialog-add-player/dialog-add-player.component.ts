@@ -9,7 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogAddPlayerComponent implements OnInit {
 
-  avatarValue;
+  avatarValue = 1;
   // @Output() passValueOfAvatar: EventEmitter<any> = new EventEmitter();
 
   avatarImages = [

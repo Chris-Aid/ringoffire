@@ -1,5 +1,5 @@
 <app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
-    [ngStyle]="{'top.px': 130 + (i * 90)}" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
+    [ngStyle]="{'left.%': i * 20}" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
 
 <img class="backgroundImage" id="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
 <div class="field">
@@ -24,7 +24,7 @@
 
 
         <!--button for selicting a background image-->
-        <!-- <div class="btn-container"> -->
+        <div class="btn-container">
             <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
                 <span class="material-symbols-outlined">
                     photo
@@ -43,7 +43,7 @@
             <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
                 <mat-icon>add</mat-icon>
             </button>
-        <!-- </div> -->
+        </div>
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>
 </div>

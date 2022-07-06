@@ -17,15 +17,15 @@ export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
 
-  // @Input() avatarValue: any;
-  // avatarValue;
+  avatarValue = 2;
 
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
   x = 1;
   clockwise = false;
-  addPlayers = 'hello'
+  addPlayers;
+  translateX = 120;
 
   backgroundImages = [
     { value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg' },
@@ -42,10 +42,10 @@ export class GameComponent implements OnInit, AfterViewInit {
       if (i == 51) {
       } else if (!this.clockwise) {
         if (i > 16) { this.clockwise = true; }
-        this.topCard.nativeElement.style.transform = 'rotate(' + i * 10 + 'deg) translateX(250px)';
+        this.topCard.nativeElement.style.transform = 'rotate(' + i * 10 + 'deg) translateX(' + this.translateX + 'px)';
         i++;
       } else {
-        this.topCard.nativeElement.style.transform = 'rotate(' + i * -10 + 'deg) translateX(250px)';
+        this.topCard.nativeElement.style.transform = 'rotate(' + i * -10 + 'deg) translateX(' + this.translateX + 'px)';
         i--;
         if (this.game.dealingCards.length <= 0) {
           clearInterval(rotateInt);
@@ -67,11 +67,19 @@ export class GameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.startDealing();
     this.newGame();
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    if(w > 450) {
+      this.translateX = 160;
+    }
   }
 
   newGame() {
     this.game = new Game;
-
   }
 
   takeCard(imgElement, i) {
@@ -150,7 +158,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   addStyleToCards(i) {
-    return { 'transform': 'rotate(' + i * 10 + 'deg)  translateX(' + 250 + 'px)' }
+    return { 'transform': 'rotate(' + i * 10 + 'deg)  translateX(' + this.translateX + 'px)' }
   }
 
   changeBackground(value) {
