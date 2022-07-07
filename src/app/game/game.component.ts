@@ -167,9 +167,11 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe(name => {
-      if (name && name.length > 0) {
+    dialogRef.afterClosed().subscribe(({name, avatarValue}) => {
+      if (name && name.length > 0 && avatarValue) {
         this.game.players.push(name);
+        this.game.avatars.push(avatarValue);
+        console.log(this.game.avatars)
       }
     });
   }

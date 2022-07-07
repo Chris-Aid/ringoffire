@@ -9,9 +9,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogAddPlayerComponent implements OnInit {
 
-  avatarValue = 1;
-  // @Output() passValueOfAvatar: EventEmitter<any> = new EventEmitter();
-
   avatarImages = [
     { value: '1', image: '/assets/img/avatar/avatar-1.png' },
     { value: '2', image: '/assets/img/avatar/avatar-2.png' },
@@ -21,6 +18,7 @@ export class DialogAddPlayerComponent implements OnInit {
   ];
 
   name: string = '';
+  avatarValue = 1;
   disableSelect = true;
 
   constructor(
@@ -31,10 +29,9 @@ export class DialogAddPlayerComponent implements OnInit {
 
   safeValue(value) {
     this.avatarValue = value;
-   console.log(this.avatarValue)
   }
 
   onNoClick(): void {
-    this.dialogRef.close(this.avatarValue);
+    this.dialogRef.close();
   }
 }

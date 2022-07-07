@@ -4,21 +4,21 @@
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
     <input matInput [(ngModel)]="name">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Choose an avatar</mat-label>
-    <mat-icon><img class="avatarImage" src="/assets/img/avatar/avatar-{{avatarValue}}.png" alt=""></mat-icon>
-    <mat-select>
-      <div class="avatarForm">
-      <mat-option *ngFor="let images of avatarImages" [value]="images.value">
-        <img (click)="safeValue(images.value)" class="avatarImage" [src]="images.image">
-      </mat-option>
-      </div>
+    </mat-form-field>
+    <mat-form-field class="avatarFormField" appearance="fill">
+      <mat-label>Choose an avatar</mat-label>
+      <mat-icon><img class="avatarImage" src="/assets/img/avatar/avatar-{{avatarValue}}.png" alt=""></mat-icon>
+      <mat-select>
+        <div class="avatarForm">
+          <mat-option *ngFor="let images of avatarImages" [value]="images.value">
+            <img (click)="safeValue(images.value)" class="avatarImage" [src]="images.image">
+          </mat-option>
+        </div>
 
-    </mat-select>
-  </mat-form-field>
+      </mat-select>
+      </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Add</button>
+  <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="{name, avatarValue}" cdkFocusInitial>Add</button>
 </div>

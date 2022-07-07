@@ -1,5 +1,6 @@
 export class Game {
   public players: string[] = [];
+  public avatars = [];
   public stack: string[] = [];
   public playedCards: string[] = [];
   public randomNumber: number[] = [];
