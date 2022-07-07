@@ -73,8 +73,16 @@ export class GameComponent implements OnInit, AfterViewInit {
   checkScreenSize() {
     var w = window.innerWidth;
     var h = window.innerHeight;
-    if(w > 450) {
+    if(w > 450 && w < 768) {
       this.translateX = 160;
+    } else if (w >= 768 && w < 992) {
+      this.translateX = 190;
+    } else if (w >= 992 && w < 1200 ) {
+      this.translateX = 220;
+    } else if (w >= 1200 && w < 1400 ) {
+      this.translateX = 250;
+    } else if (w >= 1400) {
+      this.translateX = 270;
     }
   }
 

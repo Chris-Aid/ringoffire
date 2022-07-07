@@ -1,5 +1,8 @@
-<app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
-    [ngStyle]="{'left.%': i * 20}" [avatarValue]="game.avatars[i]" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
+<div class="player-container">
+    <app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
+    [avatarValue]="game.avatars[i]" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
+</div>
+
 
 <img class="backgroundImage" id="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
 <div class="field">
