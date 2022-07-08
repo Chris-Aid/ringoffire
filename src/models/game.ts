@@ -10,7 +10,7 @@ export class Game {
   public dealingCards: string[] = [];
   public dealedCards = [];
 
-  cardCoverImage = '/assets/img/cards/card-cover1.jpg';
+  cardCoverImage = 'assets/img/cards/card-cover1.jpg';
 
   constructor() {
 

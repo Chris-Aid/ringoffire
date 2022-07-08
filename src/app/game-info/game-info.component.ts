@@ -26,6 +26,8 @@ export class GameInfoComponent implements OnInit {
   @Input() title = '';
   @Input() description = '';
   @Input() card: string;
+  @Input() addPlayersTitle;
+  @Input() addPlayersInfo: string;
   constructor() { }
 
   ngOnInit(): void {

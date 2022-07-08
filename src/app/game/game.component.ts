@@ -11,33 +11,35 @@ import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 
-
 export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('cardsOnTable') ElementView: ElementRef;
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
+  @ViewChild('infoCard') infoCard: ElementRef;
 
   avatarValue = 2;
-
   pickCardAnimation = false;
   currentCard: string = '';
   game: Game;
   x = 1;
-  cardImage;
+  cardImage: any;
   clockwise = false;
-  addPlayers;
+  infoCardDescription: string;
+  infoCardTitle: string = 'Add players!'
+  error = false;
+
   translateX = 100;
 
   backgroundImages = [
-    { value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg' },
-    { value: '2', title: 'Bright Board', image: '/assets/img/backgrounds/wood-2.jpg' },
-    { value: '3', title: 'Textured Wood', image: '/assets/img/backgrounds/wood-3.jpg' },
-    { value: '4', title: 'Textured Wood dark', image: '/assets/img/backgrounds/wood-4.jpg' },
+    { value: '1', title: 'Dark Board', image: 'assets/img/backgrounds/wood-1.jpg' },
+    { value: '2', title: 'Bright Board', image: 'assets/img/backgrounds/wood-2.jpg' },
+    { value: '3', title: 'Textured Wood', image: 'assets/img/backgrounds/wood-3.jpg' },
+    { value: '4', title: 'Textured Wood dark', image: 'assets/img/backgrounds/wood-4.jpg' },
   ]
 
   cardCovers = [
-    { value: '1', title: 'Blue card', image: '/assets/img/cards/card-cover1.jpg' },
-    { value: '2', title: 'Purple card', image: '/assets/img/cards/card-cover2.png' },
+    { value: '1', title: 'Blue card', image: 'assets/img/cards/card-cover1.jpg' },
+    { value: '2', title: 'Purple card', image: 'assets/img/cards/card-cover2.png' },
   ]
 
   constructor(public dialog: MatDialog) { }
@@ -71,15 +73,15 @@ export class GameComponent implements OnInit, AfterViewInit {
   checkScreenSize() {
     var w = window.innerWidth;
     var h = window.innerHeight;
-    if(w > 325 && w < 450) {
+    if (w > 325 && w < 450) {
       this.translateX = 120;
-    } else if(w >= 450 && w < 768) {
+    } else if (w >= 450 && w < 768) {
       this.translateX = 160;
     } else if (w >= 768 && w < 992) {
       this.translateX = 190;
-    } else if (w >= 992 && w < 1200 ) {
+    } else if (w >= 992 && w < 1200) {
       this.translateX = 220;
-    } else if (w >= 1200 && w < 1400 ) {
+    } else if (w >= 1200 && w < 1400) {
       this.translateX = 250;
     } else if (w >= 1400) {
       this.translateX = 270;
@@ -104,11 +106,11 @@ export class GameComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.game.playedCards.push(this.currentCard);
           this.pickCardAnimation = false;
-          // this.playedCard.classList.add('played-cards');
         }, 600);
       }
     } else {
-      this.addPlayers = 'Please add at least two players bofore you pick a card!'
+      this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
+      this.infoCard.nativeElement.style.display = 'none';
     }
   }
 
@@ -174,28 +176,28 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   changeCardCover(value) {
-    if(value == 1) {
-      this.game.cardCoverImage = '/assets/img/cards/card-cover1.jpg';
+    if (value == 1) {
+      this.game.cardCoverImage = 'assets/img/cards/card-cover1.jpg';
     } else {
-      this.game.cardCoverImage = '/assets/img/cards/card-cover2.png';
+      this.game.cardCoverImage = 'assets/img/cards/card-cover2.png';
     }
-
- console.log(this.game.cardCoverImage)
+    console.log(this.game.cardCoverImage)
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe(({name, avatarValue}) => {
-      if (name && name.length > 0 && avatarValue) {
+    dialogRef.afterClosed().subscribe(({ name, avatarValue }) => {
+      if (name && name.length > 0 && this.game.players.length < 4) {
         this.game.players.push(name);
         this.game.avatars.push(avatarValue);
-        console.log(this.game.avatars)
+        if (this.game.players.length > 1) {
+          this.infoCardDescription = 'Have fun! :)'
+          this.infoCardTitle = 'Pick a card';
+        }
+      } else if (this.game.players.length > 3) {
+        this.infoCardDescription = 'No more players available!'
+        this.infoCardTitle = 'Sorry!';
       }
     });
   }
 }
-
-// export class GameInfoComponent {
-
-//   title = 'hello';
-// }

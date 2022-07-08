@@ -4,7 +4,7 @@
 </div>
 
 
-<img class="backgroundImage" id="backgroundImage" src="/assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
+<img class="backgroundImage" id="backgroundImage" src="assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
 <div class="field">
 
     <!--Card Stack for dealed cards-->
@@ -14,7 +14,7 @@
 
         <!--Stack for played cards-->
         <img class="played-cards" *ngFor="let c of game.playedCards let i = index;" #playedCard
-            [ngStyle]="randomRotation(i)" src="/assets/img/cards/{{ c }}.png" alt="">
+            [ngStyle]="randomRotation(i)" src="assets/img/cards/{{ c }}.png" alt="">
 
         <!-- Card Stack -->
         <img id="dealingCards" *ngFor="let image of game.dealingCards let i = index;" class="card-stack"
@@ -22,7 +22,7 @@
             [src]='image' alt="">
 
         <!-- top card -->
-        <img #topCard class="dealingCards card-stack" src="/assets/img/cards/card-cover1.jpg" alt="">
+        <img #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
     </div>
 
 
@@ -68,5 +68,5 @@
     </div>
 
 
-    <app-game-info [card]="currentCard" class="info-card"></app-game-info>
+    <app-game-info #infoCard [addPlayersTitle]="infoCardTitle" [addPlayersInfo]="infoCardDescription" [card]="currentCard" class="info-card"></app-game-info>
 </div>
