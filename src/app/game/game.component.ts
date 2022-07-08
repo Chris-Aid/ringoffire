@@ -23,15 +23,21 @@ export class GameComponent implements OnInit, AfterViewInit {
   currentCard: string = '';
   game: Game;
   x = 1;
+  cardImage;
   clockwise = false;
   addPlayers;
-  translateX = 120;
+  translateX = 100;
 
   backgroundImages = [
     { value: '1', title: 'Dark Board', image: '/assets/img/backgrounds/wood-1.jpg' },
     { value: '2', title: 'Bright Board', image: '/assets/img/backgrounds/wood-2.jpg' },
     { value: '3', title: 'Textured Wood', image: '/assets/img/backgrounds/wood-3.jpg' },
     { value: '4', title: 'Textured Wood dark', image: '/assets/img/backgrounds/wood-4.jpg' },
+  ]
+
+  cardCovers = [
+    { value: '1', title: 'Blue card', image: '/assets/img/cards/card-cover1.jpg' },
+    { value: '2', title: 'Purple card', image: '/assets/img/cards/card-cover2.png' },
   ]
 
   constructor(public dialog: MatDialog) { }
@@ -56,14 +62,6 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   }
 
-  // passValueOfAvatar(value) {
-  //   setInterval(() => {
-  //     console.log(value)
-  //   }, 100);
-  // }
-
-
-
   ngOnInit(): void {
     this.startDealing();
     this.newGame();
@@ -73,7 +71,9 @@ export class GameComponent implements OnInit, AfterViewInit {
   checkScreenSize() {
     var w = window.innerWidth;
     var h = window.innerHeight;
-    if(w > 450 && w < 768) {
+    if(w > 325 && w < 450) {
+      this.translateX = 120;
+    } else if(w >= 450 && w < 768) {
       this.translateX = 160;
     } else if (w >= 768 && w < 992) {
       this.translateX = 190;
@@ -171,6 +171,16 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   changeBackground(value) {
     this.x = value;
+  }
+
+  changeCardCover(value) {
+    if(value == 1) {
+      this.game.cardCoverImage = '/assets/img/cards/card-cover1.jpg';
+    } else {
+      this.game.cardCoverImage = '/assets/img/cards/card-cover2.png';
+    }
+
+ console.log(this.game.cardCoverImage)
   }
 
   openDialog(): void {

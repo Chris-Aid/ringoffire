@@ -167,7 +167,7 @@
 
 
 
-/* Extra small devices (phones, 600px and down) */
+/* Extra small devices (phones, 280px and up) */
 @media only screen and (min-width: 280px) {
     .player-container {
         display: flex;
@@ -185,15 +185,15 @@
     }
 
     .dealedCards {
-        width: 100px;
+        width: 90px;
     }
 
     .card-stack {
-        width: 100px;
+        width: 90px;
     }
 
     .played-cards {
-        height: 100px;
+        height: 90px;
     }
 
     .info-card {
@@ -218,6 +218,21 @@
         position: relative;
         bottom: 0;
         right: 0;
+    }
+}
+
+/* Extra small devices (phones, 280px and up) */
+@media only screen and (min-width: 340px) {
+    .dealedCards {
+        width: 100px;
+    }
+
+    .card-stack {
+        width: 100px;
+    }
+
+    .played-cards {
+        height: 100px;
     }
 }
 
@@ -323,5 +338,44 @@
 
     .info-card {
         left: 128px;
+    }
+}
+
+/* small devices in landscape */
+@media only screen and (max-height: 400px) {
+    .dealedCards {
+        width: 90px !important;
+    }
+
+    .card-stack {
+        width: 90px !important;
+    }
+
+    .played-cards {
+        height: 90px !important;
+    }
+
+    .btn-container {
+        right: 24px;
+        gap: 12px;
+    }
+
+    .info-card {
+        left: 24px;
+        bottom: 18px;
+        width: 60vw;
+    }
+
+    .dealedCards {
+        width: 90px;
+    }
+
+    .player-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 }

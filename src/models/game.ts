@@ -10,7 +10,10 @@ export class Game {
   public dealingCards: string[] = [];
   public dealedCards = [];
 
+  cardCoverImage = '/assets/img/cards/card-cover1.jpg';
+
   constructor() {
+
     for (let i = 1; i < 14; i++) {
       this.stack.push('hearts_' + i)
       this.stack.push('spades_' + i)
@@ -21,7 +24,7 @@ export class Game {
     shuffle(this.stack);
 
     for (let i = 0; i < 52; i++) {
-      this.dealingCards.push('/assets/img/cards/card-cover.jpg');
+      this.dealingCards.push(this.cardCoverImage);
     }
 
     for (let i = 0; i < 52; i++) {
@@ -53,8 +56,3 @@ function shuffle(array) {
 
   return array;
 }
-
-  // Used like so
-//   var arr = [2, 11, 37, 42];
-//   shuffle(arr);
-//   console.log(arr);

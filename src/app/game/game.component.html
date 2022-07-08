@@ -1,6 +1,6 @@
 <div class="player-container">
     <app-player *ngFor="let players of game.players; let i = index;" class="player-postition"
-    [avatarValue]="game.avatars[i]" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
+        [avatarValue]="game.avatars[i]" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
 </div>
 
 
@@ -22,31 +22,51 @@
             [src]='image' alt="">
 
         <!-- top card -->
-        <img #topCard class="dealingCards card-stack" src="/assets/img/cards/card-cover.jpg" alt="">
+        <img #topCard class="dealingCards card-stack" src="/assets/img/cards/card-cover1.jpg" alt="">
     </div>
 
 
-        <!--button for selicting a background image-->
-        <div class="btn-container">
-            <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
-                <span class="material-symbols-outlined">
-                    photo
-                </span>
-                <mat-select>
-                    <div><h2 class="subtitle-imageSelector">Select a table!</h2></div>
-                    <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
-                        <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
-                                [src]="images.image">
-                            {{images.title}}</span>
-                    </mat-option>
-                </mat-select>
-            </button>
-    
-            <!--button to enter names of players-->
-            <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
-                <mat-icon>add</mat-icon>
-            </button>
-        </div>
+    <!--button for selicting a background image-->
+    <div class="btn-container">
+        <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <span class="material-symbols-outlined">
+                photo
+            </span>
+            <mat-select>
+                <div>
+                    <h2 class="subtitle-imageSelector">Select a table!</h2>
+                </div>
+                <mat-option *ngFor="let images of backgroundImages" [value]="images.value">
+                    <span (click)="changeBackground(images.value)" class="option-content"><img width="70" height="40"
+                            [src]="images.image">
+                        {{images.title}}</span>
+                </mat-option>
+            </mat-select>
+        </button>
+
+        <!--button to enter names of players-->
+        <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+        </button>
+
+        <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <span class="material-symbols-outlined">
+                photo
+            </span>
+            <mat-select>
+                <div>
+                    <h2 class="subtitle-imageSelector">Select your card design!</h2>
+                </div>
+                <mat-option *ngFor="let images of cardCovers" [value]="images.value">
+                    <span (click)="changeCardCover(images.value)" class="option-content"><img width="70" height="40"
+                            [src]="images.image">
+                        {{images.title}}</span>
+                </mat-option>
+            </mat-select>
+        </button>
+
+    </div>
+
 
     <app-game-info [card]="currentCard" class="info-card"></app-game-info>
 </div>
