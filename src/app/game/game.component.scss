@@ -69,8 +69,6 @@
 
 .info-card {
     position: absolute;
-    width: 70vw;
-    bottom: 48px;
 }
 
 .cardStack {
@@ -169,7 +167,50 @@
     padding-left: 16px;
 }
 
+.jump {
+    animation: jump 600ms 2 ease-in-out;
+}
 
+@keyframes jump {
+    0% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    25% {
+        transform: scale(1.1, .9) translateY(0);
+    }
+
+    50% {
+        transform: scale(.9, 1.1) translateY(-70px);
+    }
+
+    75% {
+        transform: scale(1, 1) translateY(0);
+    }
+
+    100% {
+        transform: scale(1, 1) translateY(0);
+    }
+}
+
+.errorInfo {
+    background-color: #ff0000 !important;
+    animation: blink 600ms 2 ease-in-out;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }  
+
+    100% {
+        opacity: 1;
+    } 
+}
 
 /* Extra small devices (phones, 280px and up) */
 @media only screen and (min-width: 280px) {
@@ -213,15 +254,41 @@
     }
 
     .btn-selectImg {
+        background-color: #24b657 !important;
         position: relative;
         bottom: 0;
         right: 0;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
     }
 
     .btn-add {
+        background-color: #405da6 !important;
         position: relative;
         bottom: 0;
         right: 0;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    .btn-selectCard {
+        background-color: #b8c55d !important;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
+    }
+
+    .refreshBtn {
+        background-color: #b3377b !important;
+
+        &:hover {
+            filter: brightness(1.2);
+        }
     }
 }
 
@@ -258,7 +325,7 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .info-card {
-        width: 70vw;
+        width: 60vw;
     }
 }
 
@@ -298,7 +365,7 @@
     }
 
     .info-card {
-        left: 32px;
+        left: 64px;
         bottom: 32px;
     }
 
@@ -321,9 +388,9 @@
         right: 64px;
     }
 
-    .info-card {
-        left: 64px;
-    }
+    // .info-card {
+    //     left: 64px;
+    // }
 }
 
 /* Extra large devices (large laptops and desktops, 1400px and up) */
@@ -343,6 +410,10 @@
     .info-card {
         left: 128px;
     }
+
+    .btn-container {
+        right: 128px;
+    }
 }
 
 /* small devices in landscape */
@@ -360,7 +431,7 @@
     }
 
     .btn-container {
-        right: 24px;
+        right: 64px;
         gap: 12px;
     }
 

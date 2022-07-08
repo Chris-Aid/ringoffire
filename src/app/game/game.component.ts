@@ -16,7 +16,9 @@ export class GameComponent implements OnInit, AfterViewInit {
   @ViewChild('topCard') topCard: ElementRef;
   @ViewChild('playedCard') playedCard: ElementRef;
   @ViewChild('infoCard') infoCard: ElementRef;
+  @ViewChild('addPlayerBtn') addPlayerBtn: ElementRef;
 
+  
   avatarValue = 2;
   pickCardAnimation = false;
   currentCard: string = '';
@@ -26,7 +28,8 @@ export class GameComponent implements OnInit, AfterViewInit {
   clockwise = false;
   infoCardDescription: string;
   infoCardTitle: string = 'Add players!'
-  error = false;
+  jump = false;
+  errorInfo = false;
 
   translateX = 100;
 
@@ -81,15 +84,19 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.translateX = 190;
     } else if (w >= 992 && w < 1200) {
       this.translateX = 220;
-    } else if (w >= 1200 && w < 1400) {
-      this.translateX = 250;
-    } else if (w >= 1400) {
+    } else if (w >= 1200 && w < 1400 && h > 800) {
+      this.translateX = 230;
+    } else if (w >= 1400 && h > 800) {
       this.translateX = 270;
+    } else if (w >= 1200 && h < 800) {
+      this.translateX = 210;
     }
   }
 
   newGame() {
     this.game = new Game;
+    
+    console.log(this.game)
   }
 
   takeCard(imgElement, i) {
@@ -110,7 +117,13 @@ export class GameComponent implements OnInit, AfterViewInit {
       }
     } else {
       this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
-      this.infoCard.nativeElement.style.display = 'none';
+      // this.addPlayerBtn.nativeElement.style.display = 'none';
+      this.jump = true;
+      this.errorInfo = true;
+      setTimeout(() => {
+        this.jump = false;
+        this.errorInfo = false
+      }, 1200);
     }
   }
 
@@ -199,5 +212,9 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.infoCardTitle = 'Sorry!';
       }
     });
+  }
+
+  refresh() {
+    window.location.reload();
   }
 }

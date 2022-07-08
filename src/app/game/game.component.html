@@ -45,28 +45,35 @@
         </button>
 
         <!--button to enter names of players-->
-        <button mat-fab color="primary" class="btn-add" (click)="openDialog()">
+        <button [ngClass]="{'jump' : jump}" mat-fab color="primary" class="btn-add" (click)="openDialog()">
             <mat-icon>add</mat-icon>
         </button>
 
-        <button class="btn-selectImg" mat-fab color="warn" aria-label="Example icon button with a home icon">
+        <!-- <button class="btn-selectCard" mat-fab color="warn" aria-label="Example icon button with a home icon">
             <span class="material-symbols-outlined">
-                photo
+                note_add
             </span>
             <mat-select>
                 <div>
                     <h2 class="subtitle-imageSelector">Select your card design!</h2>
                 </div>
                 <mat-option *ngFor="let images of cardCovers" [value]="images.value">
-                    <span (click)="changeCardCover(images.value)" class="option-content"><img width="70" height="40"
+                    <span (click)="changeCardCover(images.value)" class="option-content-cards"><img width="70" height="40"
                             [src]="images.image">
                         {{images.title}}</span>
                 </mat-option>
             </mat-select>
+        </button> -->
+
+        <button class="refreshBtn newGame" (click)="refresh()" mat-fab color="warn" aria-label="Example icon button with a home icon">
+            <span class="material-symbols-outlined">
+                replay
+                </span>
         </button>
 
     </div>
 
 
-    <app-game-info #infoCard [addPlayersTitle]="infoCardTitle" [addPlayersInfo]="infoCardDescription" [card]="currentCard" class="info-card"></app-game-info>
+    <app-game-info [ngClass]="{'errorInfo' : errorInfo}" [addPlayersTitle]="infoCardTitle" [addPlayersInfo]="infoCardDescription"
+        [card]="currentCard" class="info-card"></app-game-info>
 </div>

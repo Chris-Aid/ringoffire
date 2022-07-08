@@ -92,6 +92,11 @@ body {
 
 .mat-select-panel {
     min-width: 100% !important;
+
+}
+
+.mat-option {
+    height: 4em !important;
 }
 
 .ng-ng-tns-c91-4  {
@@ -104,6 +109,14 @@ body {
 
 .mat-card {
     padding: 8px !important;
+}
+
+.option-content-cards {
+img {
+    transform: rotate(90deg);
+    // margin-top: 5px;
+    // margin-bottom: 5px;
+}
 }
 
 /* small devices in landscape */

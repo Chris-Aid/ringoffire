@@ -14,6 +14,11 @@ export class Game {
 
   constructor() {
 
+    this.stack = [];
+    this.dealingCards = [];
+    this.randomNumber = [];
+    this.roationOfCards = [];
+
     for (let i = 1; i < 14; i++) {
       this.stack.push('hearts_' + i)
       this.stack.push('spades_' + i)
