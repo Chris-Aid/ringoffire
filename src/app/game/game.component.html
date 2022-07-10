@@ -4,8 +4,8 @@
 </div>
 
 
-<img class="backgroundImage" id="backgroundImage" src="assets/img/backgrounds/wood-{{x}}.jpg" alt="Background Image">
-<div class="field">
+<img class="backgroundImage" id="backgroundImage" src="assets/img/backgrounds/wood-{{currentBackgroundImage}}.jpg" alt="Background Image">
+<div (window:resize)="onResize()" class="field">
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">

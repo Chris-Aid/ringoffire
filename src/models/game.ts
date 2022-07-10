@@ -19,6 +19,7 @@ export class Game {
     this.randomNumber = [];
     this.roationOfCards = [];
 
+    // pushes all 52 cards to the stack
     for (let i = 1; i < 14; i++) {
       this.stack.push('hearts_' + i)
       this.stack.push('spades_' + i)
@@ -32,6 +33,7 @@ export class Game {
       this.dealingCards.push(this.cardCoverImage);
     }
 
+    //generates 52 random numbers with either - or + sign
     for (let i = 0; i < 52; i++) {
       var plusOrMinus = Math.random() < 0.5 ? -1 : 1;
       this.randomNumber.push(plusOrMinus * Math.random());
@@ -40,7 +42,6 @@ export class Game {
     for (let i = 0; i < 52; i++) {
       this.roationOfCards.push(i * 1);
     }
-
   }
 }
 
