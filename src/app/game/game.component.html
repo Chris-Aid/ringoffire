@@ -3,8 +3,8 @@
         [avatarValue]="game.avatars[i]" [name]="players" [playerActive]="i == game.currentPlayer"></app-player>
 </div>
 
-
-<img class="backgroundImage" id="backgroundImage" src="assets/img/backgrounds/wood-{{currentBackgroundImage}}.jpg" alt="Background Image">
+<img class="backgroundImage" id="backgroundImage" src="assets/img/backgrounds/wood-{{currentBackgroundImage}}.jpg"
+    alt="Background Image">
 <div (window:resize)="onResize()" class="field">
 
     <!--Card Stack for dealed cards-->
@@ -65,15 +65,14 @@
             </mat-select>
         </button> -->
 
-        <button class="refreshBtn newGame" (click)="refresh()" mat-fab color="warn" aria-label="Example icon button with a home icon">
+        <button class="refreshBtn newGame" (click)="refresh()" mat-fab color="warn"
+            aria-label="Example icon button with a home icon">
             <span class="material-symbols-outlined">
                 replay
-                </span>
+            </span>
         </button>
-
     </div>
 
-
-    <app-game-info [ngClass]="{'errorInfo' : errorInfo}" [addPlayersTitle]="infoCardTitle" [addPlayersInfo]="infoCardDescription"
-        [card]="currentCard" class="info-card"></app-game-info>
+    <app-game-info [ngClass]="{'errorInfo' : errorInfo}" [addPlayersTitle]="infoCardTitle"
+        [addPlayersInfo]="infoCardDescription" [card]="currentCard" class="info-card"></app-game-info>
 </div>

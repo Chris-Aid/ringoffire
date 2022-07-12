@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ring-of-fire-c149d": {
+      "hosting": {
+        "ringoffire": [
+          "ring-of-fire-c149d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ring-of-fire-c149d"
+  }
+}
