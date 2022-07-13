@@ -1,8 +1,13 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { getDoc } from 'firebase/firestore';
+
 
 
 @Component({
@@ -28,10 +33,12 @@ export class GameComponent implements OnInit, AfterViewInit {
   translateX = 100;
   currentBackgroundImage = 1;
 
+  item$: Observable<any>;
   currentCard: string = '';
   infoCardDescription: string;
   infoCardTitle: string = 'Add players!'
   game: Game;
+  myGameId: string;
   cardImage: any;
 
   backgroundImages = [
@@ -45,8 +52,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     { value: '1', title: 'Blue card', image: 'assets/img/cards/card-cover1.jpg' },
     { value: '2', title: 'Purple card', image: 'assets/img/cards/card-cover2.png' },
   ];
+  db: any;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private firestore: Firestore, private route: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
     this.topcardDealingAnimation();
@@ -76,9 +84,23 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.startDealing();
     this.newGame();
     this.onResize();
+    this.startDealing();
+
+    this.route.params.subscribe((params) => {
+      // this.myGameId = params['id'];
+      console.log(params['id']);
+
+      this.db.collection
+      .doc(params['id'])
+      .valueChages()
+      .subscribe((game) => {
+        console.log(game)
+      })
+
+    });
+
   }
 
   //this function changes the gap between the dealed cards every time the screen resizes
@@ -109,7 +131,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   takeCard(imgElement, i) {
     if (this.game.players.length > 1) {
       if (!this.pickCardAnimation) {
-        
+
         this.currentCard = this.game.stack.pop();
         this.turnCardAnimation(imgElement, i);
         this.pickCardAnimation = true;
@@ -124,7 +146,7 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.pickMorePlayers();
     }
   }
- 
+
   // current player variable changes color of current player to orange
   nextPlayer() {
     this.game.currentPlayer++;
@@ -217,7 +239,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     window.location.reload();
   }
 
-    //this function is not in use right now!
+  //this function is not in use right now!
   // changeCardCover(value) {
   //   if (value == 1) {
   //     this.game.cardCoverImage = 'assets/img/cards/card-cover1.jpg';

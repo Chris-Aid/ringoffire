@@ -43,6 +43,15 @@ export class Game {
       this.roationOfCards.push(i * 1);
     }
   }
+
+  public toJson() {
+    return {
+      players: this.players,
+      stack: this.stack,
+      playedCards: this.playedCards,
+      currentplayer: this.currentPlayer
+    }
+  }
 }
 
 function shuffle(array) {
