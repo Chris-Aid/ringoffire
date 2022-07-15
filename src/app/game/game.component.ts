@@ -5,8 +5,8 @@ import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { collection, collectionData, doc, Firestore, setDoc } from '@angular/fire/firestore';
-import { getDoc } from 'firebase/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 
 
@@ -54,7 +54,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   ];
   db: any;
 
-  constructor(public dialog: MatDialog, private firestore: Firestore, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
     this.topcardDealingAnimation();
@@ -89,18 +89,21 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.startDealing();
 
     this.route.params.subscribe((params) => {
-      // this.myGameId = params['id'];
+      this.myGameId = params['id'];
       console.log(params['id']);
 
-      this.db.collection
+      this.firestore
+      .collection('games')
       .doc(params['id'])
-      .valueChages()
-      .subscribe((game) => {
-        console.log(game)
-      })
-
+      .valueChanges()
+      .subscribe( (game:any) => {
+        console.log('my Game', game);
+        this.game.currentPlayer = game.currentPlayer
+        this.game.stack = game.stack
+        this.game.players = game.players
+        this.game.avatars = game.avatars
+      });
     });
-
   }
 
   //this function changes the gap between the dealed cards every time the screen resizes
@@ -145,6 +148,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     } else {
       this.pickMorePlayers();
     }
+    console.log(this.game.currentPlayer)
   }
 
   // current player variable changes color of current player to orange
@@ -232,11 +236,19 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.infoCardDescription = 'No more players available!'
         this.infoCardTitle = 'Sorry!';
       }
+      this.saveGame();
     });
   }
 
   refresh() {
     window.location.reload();
+  }
+
+  saveGame() {
+    this.firestore
+    .collection('games')
+    .doc(this.myGameId)
+    .update(this.game.toJson());
   }
 
   //this function is not in use right now!

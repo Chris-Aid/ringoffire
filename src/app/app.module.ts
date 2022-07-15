@@ -22,6 +22,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
+import {AngularFireModule} from '@angular/fire/compat/';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +45,12 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
+
+    AngularFireModule.initializeApp(environment.firebase), // compat API
+    provideFirebaseApp(() => initializeApp(environment.firebase)), //modular API
+
+   
+    AngularFirestoreModule,
     provideFirestore(() => getFirestore())
   ],
   providers: [],

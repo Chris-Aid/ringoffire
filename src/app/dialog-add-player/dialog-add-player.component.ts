@@ -1,14 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgModule } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-// import { EventEmitter } from 'stream';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-dialog-add-player',
   templateUrl: './dialog-add-player.component.html',
   styleUrls: ['./dialog-add-player.component.scss']
 })
-export class DialogAddPlayerComponent implements OnInit {
 
+
+
+
+export class DialogAddPlayerComponent implements OnInit {
+  game;
   avatarImages = [
     { value: '1', image: '/assets/img/avatar/avatar-1.png' },
     { value: '2', image: '/assets/img/avatar/avatar-2.png' },

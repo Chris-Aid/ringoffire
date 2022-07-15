@@ -1,11 +1,12 @@
 export class Game {
   public players: string[] = [];
+  public avatarValue: string[] = [];
   public avatars = [];
   public stack: string[] = [];
   public playedCards: string[] = [];
   public randomNumber: number[] = [];
   public roationOfCards: number[] = [];
-  public currentPlayer: number = 0;
+  public currentPlayer = 0;
 
   public dealingCards: string[] = [];
   public dealedCards = [];
@@ -49,7 +50,8 @@ export class Game {
       players: this.players,
       stack: this.stack,
       playedCards: this.playedCards,
-      currentplayer: this.currentPlayer
+      currentPlayer: this.currentPlayer,
+      avatars: this.avatars
     }
   }
 }
