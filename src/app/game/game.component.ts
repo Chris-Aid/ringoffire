@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, SimpleChanges, } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -6,9 +6,7 @@ import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
-
-
+import { doc, setDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-game',
@@ -25,16 +23,16 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   readonly HalfCircleDealed = 17;
 
-  pickCardAnimation = false;
   errorInfo = false;
   jump = false;
+  @Input() restart: boolean = false;
 
   avatarValue = 2;
   translateX = 100;
   currentBackgroundImage = 1;
+  alreadyPlayed: boolean = false;
 
-  item$: Observable<any>;
-  currentCard: string = '';
+  // item$: Observable<any>;
   infoCardDescription: string;
   infoCardTitle: string = 'Add players!'
   game: Game;
@@ -87,22 +85,27 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.newGame();
     this.onResize();
     this.startDealing();
+    this.getGameFromFirestore();
+  }
 
+  getGameFromFirestore() {
     this.route.params.subscribe((params) => {
       this.myGameId = params['id'];
-      console.log(params['id']);
 
       this.firestore
-      .collection('games')
-      .doc(params['id'])
-      .valueChanges()
-      .subscribe( (game:any) => {
-        console.log('my Game', game);
-        this.game.currentPlayer = game.currentPlayer
-        this.game.stack = game.stack
-        this.game.players = game.players
-        this.game.avatars = game.avatars
-      });
+        .collection('games')
+        .doc(this.myGameId)
+        .valueChanges()
+        .subscribe((game: any) => {
+          this.game.currentPlayer = game.currentPlayer
+          this.game.playedCards = game.playedCards
+          this.game.stack = game.stack
+          this.game.players = game.players
+          this.game.avatars = game.avatars
+          this.game.pickCardAnimation = game.pickCardAnimation
+          this.game.currentCard = game.currentCard
+          this.game.dealedCards = game.dealedCards
+        });
     });
   }
 
@@ -133,22 +136,23 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   takeCard(imgElement, i) {
     if (this.game.players.length > 1) {
-      if (!this.pickCardAnimation) {
-
-        this.currentCard = this.game.stack.pop();
+      if (!this.game.pickCardAnimation) {
+        this.game.currentCard = this.game.stack.pop();
         this.turnCardAnimation(imgElement, i);
-        this.pickCardAnimation = true;
+        this.game.pickCardAnimation = true;
         this.nextPlayer();
+        this.saveGame();
 
         setTimeout(() => {
-          this.game.playedCards.push(this.currentCard);
-          this.pickCardAnimation = false;
+          this.game.playedCards.push(this.game.currentCard);
+          this.game.pickCardAnimation = false;
+          this.game.dealedCards[i].alreadyPlayed = true;
+          this.saveGame();
         }, 600);
       }
     } else {
       this.pickMorePlayers();
     }
-    console.log(this.game.currentPlayer)
   }
 
   // current player variable changes color of current player to orange
@@ -169,12 +173,14 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   startDealing() {
+    if(this.game.playedCards.length == 0) {
     setInterval(() => {
       if (this.game.dealingCards.length > 0) {
         let lastCardOfStack = this.game.dealingCards.pop();
-        this.game.dealedCards.push({ source: lastCardOfStack });
+        this.game.dealedCards.push({ source: lastCardOfStack, alreadyPlayed : false});
       }
     }, 250);
+    }
   }
 
   turnCardAnimation(imgElement, i) {
@@ -185,9 +191,10 @@ export class GameComponent implements OnInit, AfterViewInit {
     imgElement.classList.add('turnCardAnimation');
 
     setTimeout(() => {
+      // this.game.dealedCards.splice(i, 1);
       imgElement.remove();
+      this.saveGame();
     }, 600);
-
   }
 
   getRotationOfMatrix(CardMatrix, i) {
@@ -242,13 +249,22 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   refresh() {
     window.location.reload();
+    this.game.startNewGame();
+    this.restart = true;
+    this.changeInfobox();
+    this.saveGame();
+  }
+
+  changeInfobox() {
+    this.infoCardTitle = 'Pick a card';
+    this.infoCardDescription = '';
   }
 
   saveGame() {
     this.firestore
-    .collection('games')
-    .doc(this.myGameId)
-    .update(this.game.toJson());
+      .collection('games')
+      .doc(this.myGameId)
+      .update(this.game.toJson());
   }
 
   //this function is not in use right now!

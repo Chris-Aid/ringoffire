@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-game-info',
@@ -18,13 +18,13 @@ export class GameInfoComponent implements OnInit {
     { title: 'Mate', description: 'Pick a mate. Your mate must always drink when you drink and the other way around.' },
     { title: 'Thumbmaster', description: '' },
     { title: 'Men', description: 'All men drink.' },
-    { title: 'Quizmaster', description: 'Make a rule. The player who drew the card makes a new rule (e.g. you can not say the word "yes" or you can not put your drink down) and anyone who breaks the rule at any time throughout the rest of the game has to drink.'},
+    { title: 'Quizmaster', description: 'Make a rule. The player who drew the card makes a new rule (e.g. you can not say the word "yes" or you can not put your drink down) and anyone who breaks the rule at any time throughout the rest of the game has to drink.' },
     { title: 'Never have i ever...', description: 'Say something you never did. Everyone who did it has to drink.' },
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
   ];
 
-  @Input() title = '';
-  @Input() description = '';
+  // @Input() title = '';
+  // @Input() description = '';
   @Input() card: string;
   @Input() addPlayersTitle;
   @Input() addPlayersInfo: string;
@@ -34,11 +34,12 @@ export class GameInfoComponent implements OnInit {
 
   }
 
-  ngOnChanges(): void {
-    if(this.card) {
-    let cardNumber = +this.card.split('_')[1];
-    this.title = this.cardAction[cardNumber - 1].title;
-    this.description = this.cardAction[cardNumber - 1].description ;
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+    if (this.card) {
+      let cardNumber = +this.card.split('_')[1];
+      this.addPlayersTitle = this.cardAction[cardNumber - 1].title;
+      this.addPlayersInfo = this.cardAction[cardNumber - 1].description;
     }
   }
 }

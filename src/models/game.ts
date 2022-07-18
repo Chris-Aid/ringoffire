@@ -10,15 +10,28 @@ export class Game {
 
   public dealingCards: string[] = [];
   public dealedCards = [];
+  public pickCardAnimation = false;
+  public currentCard: string = '';
+
+  restart = false;
 
   cardCoverImage = 'assets/img/cards/card-cover1.jpg';
 
   constructor() {
+    this.startNewGame();
+  }
 
+  // public aNewGame() {
+
+  // }
+
+  public startNewGame() {
     this.stack = [];
     this.dealingCards = [];
     this.randomNumber = [];
     this.roationOfCards = [];
+    this.playedCards = [];
+    this.dealedCards = [];
 
     // pushes all 52 cards to the stack
     for (let i = 1; i < 14; i++) {
@@ -30,6 +43,7 @@ export class Game {
 
     shuffle(this.stack);
 
+    //pushes 52 card cover images to array
     for (let i = 0; i < 52; i++) {
       this.dealingCards.push(this.cardCoverImage);
     }
@@ -40,6 +54,7 @@ export class Game {
       this.randomNumber.push(plusOrMinus * Math.random());
     }
 
+    //generates random rotations
     for (let i = 0; i < 52; i++) {
       this.roationOfCards.push(i * 1);
     }
@@ -51,7 +66,11 @@ export class Game {
       stack: this.stack,
       playedCards: this.playedCards,
       currentPlayer: this.currentPlayer,
-      avatars: this.avatars
+      avatars: this.avatars,
+      pickCardAnimation: this.pickCardAnimation,
+      currentCard: this.currentCard,
+      restart: this.restart,
+      dealedCards: this.dealedCards
     }
   }
 }

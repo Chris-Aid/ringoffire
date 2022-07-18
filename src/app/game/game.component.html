@@ -9,9 +9,11 @@
 
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
-        <img *ngFor="let img of game.dealedCards let i = index;" #imgElement class="dealedCards"
+        <ng-container *ngFor="let img of game.dealedCards let i = index;" >
+            <img #imgElement *ngIf="!game.dealedCards[i].alreadyPlayed"  class="dealedCards"
             [ngStyle]="addStyleToCards(i)" (click)="takeCard(imgElement, i)" [src]='img.source' alt="">
-
+        </ng-container>
+        
         <!--Stack for played cards-->
         <img class="played-cards" *ngFor="let c of game.playedCards let i = index;" #playedCard
             [ngStyle]="randomRotation(i)" src="assets/img/cards/{{ c }}.png" alt="">
@@ -74,5 +76,5 @@
     </div>
 
     <app-game-info [ngClass]="{'errorInfo' : errorInfo}" [addPlayersTitle]="infoCardTitle"
-        [addPlayersInfo]="infoCardDescription" [card]="currentCard" class="info-card"></app-game-info>
+        [addPlayersInfo]="infoCardDescription" [card]="game.currentCard" class="info-card"></app-game-info>
 </div>
