@@ -21,10 +21,6 @@ export class Game {
     this.startNewGame();
   }
 
-  // public aNewGame() {
-
-  // }
-
   public startNewGame() {
     this.stack = [];
     this.dealingCards = [];
@@ -70,7 +66,8 @@ export class Game {
       pickCardAnimation: this.pickCardAnimation,
       currentCard: this.currentCard,
       restart: this.restart,
-      dealedCards: this.dealedCards
+      dealedCards: this.dealedCards,
+      dealingCards: this.dealingCards,
     }
   }
 }

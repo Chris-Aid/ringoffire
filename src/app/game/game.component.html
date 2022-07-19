@@ -24,7 +24,7 @@
             [src]='image' alt="">
 
         <!-- top card -->
-        <img #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
+        <img *ngIf="game.dealingCards.length > 0" #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
     </div>
 
 
