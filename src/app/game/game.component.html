@@ -25,6 +25,8 @@
 
         <!-- top card -->
         <img *ngIf="game.dealingCards.length > 0" #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
+
+        <button (click)="skipDealing()" mat-raised-button color="warn">Skip dealing</button>
     </div>
 
 

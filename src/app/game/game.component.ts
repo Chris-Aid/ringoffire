@@ -26,7 +26,8 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   errorInfo = false;
   jump = false;
-  @Input() restart: boolean = false;
+
+  dealingSpeed = 250;
 
   avatarValue = 2;
   translateX = 100;
@@ -56,7 +57,7 @@ export class GameComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog, private firestore: AngularFirestore, private route: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
-      this.topcardDealingAnimation();
+    this.topcardDealingAnimation();
   }
 
   topcardDealingAnimation() {
@@ -114,9 +115,12 @@ export class GameComponent implements OnInit, AfterViewInit {
           this.game.currentCard = game.currentCard
           this.game.dealedCards = game.dealedCards
           this.game.dealingCards = game.dealingCards
+          if(game.title && game.description) {
+            this.infoCardTitle = game.title
+            this.infoCardDescription = game.description
+          }
         });
     });
-
   }
 
   takeCard(imgElement, i) {
@@ -139,7 +143,6 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   startDealing() {
     if (this.game.dealingCards.length > 0) {
       let popCard = setInterval(() => {
@@ -150,7 +153,7 @@ export class GameComponent implements OnInit, AfterViewInit {
           clearInterval(popCard)
           this.saveGame();
         }
-      }, 250);
+      }, this.dealingSpeed);
     }
   }
 
@@ -199,14 +202,21 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.infoCardDescription = 'No more players available!'
         this.infoCardTitle = 'Sorry!';
       }
+      this.updateInfobox();
       this.saveGame();
     });
+  }
+
+  updateInfobox() {
+    this.firestore
+      .collection('games')
+      .doc(this.myGameId)
+      .set({ description: this.infoCardDescription, title: this.infoCardTitle });
   }
 
   refresh() {
     window.location.reload();
     this.game.startNewGame();
-    this.restart = true;
     this.changeInfobox();
   }
 
@@ -238,7 +248,6 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.errorInfo = false
     }, 1200);
   }
-
 
   // adds a random rotation to cards that are taken
   randomRotation(i) {
@@ -274,13 +283,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  //this function is not in use right now!
-  // changeCardCover(value) {
-  //   if (value == 1) {
-  //     this.game.cardCoverImage = 'assets/img/cards/card-cover1.jpg';
-  //   } else {
-  //     this.game.cardCoverImage = 'assets/img/cards/card-cover2.png';
-  //   }
-  // }
+  skipDealing() {
+    this.dealingSpeed = 50;
+    this.startDealing
+    console.log(this.dealingSpeed)
+  }
 }
