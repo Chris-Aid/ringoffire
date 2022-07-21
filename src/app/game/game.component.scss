@@ -57,6 +57,11 @@
     border-radius: 5px;
 }
 
+.skip-btn {
+position: absolute;
+top: 128px;
+}
+
 @keyframes rotateCard {
     0% {
         transform: rotateY(90deg);

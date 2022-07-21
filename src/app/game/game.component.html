@@ -24,11 +24,10 @@
             [src]='image' alt="">
 
         <!-- top card -->
-        <img *ngIf="game.dealingCards.length > 0" #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
+        <img *ngIf="game.dealingCards && game.dealingCards.length > 0" #topCard class="dealingCards card-stack" src="assets/img/cards/card-cover1.jpg" alt="">
 
-        <button (click)="skipDealing()" mat-raised-button color="warn">Skip dealing</button>
+        <button *ngIf="game.dealingCards && game.dealingCards.length > 0" #skipDealingBtn class="skip-btn" (click)="skipDealing(50)" mat-raised-button color="warn">Skip dealing</button>
     </div>
-
 
     <!--button for selicting a background image-->
     <div class="btn-container">
@@ -69,7 +68,7 @@
             </mat-select>
         </button> -->
 
-        <button class="refreshBtn newGame" (click)="refresh()" mat-fab color="warn"
+        <button class="refreshBtn newGame" (click)="replay()" mat-fab color="warn"
             aria-label="Example icon button with a home icon">
             <span class="material-symbols-outlined">
                 replay

@@ -3,11 +3,8 @@ import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { doc, setDoc } from "firebase/firestore";
-import { setTokenAutoRefreshEnabled } from '@angular/fire/app-check';
 
 @Component({
   selector: 'app-game',
@@ -28,15 +25,14 @@ export class GameComponent implements OnInit, AfterViewInit {
   jump = false;
 
   dealingSpeed = 250;
-
   avatarValue = 2;
   translateX = 100;
   currentBackgroundImage = 1;
   alreadyPlayed: boolean = false;
   gameStarted: true;
 
-  infoCardDescription: string;
-  infoCardTitle: string = 'Add players!'
+  infoCardDescription: string = "";
+  infoCardTitle: string = ''
   game: Game;
   myGameId: string;
   cardImage: any;
@@ -58,6 +54,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.topcardDealingAnimation();
+    this.startDealing(250);
   }
 
   topcardDealingAnimation() {
@@ -89,8 +86,8 @@ export class GameComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.newGame();
     this.onResize();
+    this.setInfobox();
     this.getGameFromFirestore();
-    this.startDealing();
   }
 
   newGame() {
@@ -115,7 +112,7 @@ export class GameComponent implements OnInit, AfterViewInit {
           this.game.currentCard = game.currentCard
           this.game.dealedCards = game.dealedCards
           this.game.dealingCards = game.dealingCards
-          if(game.title && game.description) {
+          if (game.title && game.description) {
             this.infoCardTitle = game.title
             this.infoCardDescription = game.description
           }
@@ -123,11 +120,22 @@ export class GameComponent implements OnInit, AfterViewInit {
     });
   }
 
+  setInfobox() {
+    if(this.game.players.length >= 2) {
+      this.infoCardTitle = 'Pick a card! :)'
+      this.infoCardDescription = 'Have fun!'
+    } else {
+      this.infoCardTitle = 'Add players!'
+      this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
+    }
+  }
+
   takeCard(imgElement, i) {
     if (this.game.players.length > 1) {
       if (!this.game.pickCardAnimation) {
         this.game.currentCard = this.game.stack.pop();
         this.turnCardAnimation(imgElement, i);
+        console.log(imgElement)
         this.game.pickCardAnimation = true;
         this.nextPlayer();
 
@@ -143,7 +151,8 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
   }
 
-  startDealing() {
+  startDealing(dealingSpeed) {
+    // dealingSpeed = 250;
     if (this.game.dealingCards.length > 0) {
       let popCard = setInterval(() => {
         if (this.game.dealingCards.length > 0) {
@@ -153,7 +162,7 @@ export class GameComponent implements OnInit, AfterViewInit {
           clearInterval(popCard)
           this.saveGame();
         }
-      }, this.dealingSpeed);
+      }, dealingSpeed);
     }
   }
 
@@ -214,15 +223,15 @@ export class GameComponent implements OnInit, AfterViewInit {
       .set({ description: this.infoCardDescription, title: this.infoCardTitle });
   }
 
-  refresh() {
-    window.location.reload();
+  //starts a new game!!
+  replay() {
     this.game.startNewGame();
-    this.changeInfobox();
-  }
-
-  changeInfobox() {
-    this.infoCardTitle = 'Pick a card';
-    this.infoCardDescription = '';
+    this.infoCardTitle = 'Pick a card! :)'
+    this.infoCardDescription = "";
+    this.game.currentCard = "";
+    this.updateInfobox();
+    this.saveGame();
+        location.reload();
   }
 
   saveGame() {
@@ -232,6 +241,17 @@ export class GameComponent implements OnInit, AfterViewInit {
       .update(this.game.toJson());
   }
 
+  // checkIfCardPlayed() {
+  //   for (var card of this.game.dealedCards) {
+  //     if(card.alreadyPlayed) {
+  //       console.log(card)
+  //     }
+  //   }
+  //   // setInterval( () => {
+
+  //   // },)
+  // }
+
   // current player variable changes color of current player to orange
   nextPlayer() {
     this.game.currentPlayer++;
@@ -240,6 +260,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   // adds animation to info card and add-player-button
   pickMorePlayers() {
+    this.infoCardTitle= 'Add players!'
     this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
     this.jump = true;
     this.errorInfo = true;
@@ -283,9 +304,8 @@ export class GameComponent implements OnInit, AfterViewInit {
     }
   }
 
-  skipDealing() {
-    this.dealingSpeed = 50;
-    this.startDealing
-    console.log(this.dealingSpeed)
+  skipDealing(dealingSpeed) {
+    this.startDealing(dealingSpeed);
+    this.topCard.nativeElement.style.display = 'none';
   }
 }
