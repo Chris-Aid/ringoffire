@@ -10,7 +10,7 @@
     <!--Card Stack for dealed cards-->
     <div class="dealedCardsOnTable">
         <ng-container *ngFor="let img of game.dealedCards let i = index;" >
-            <img #imgElement *ngIf="!game.dealedCards[i].alreadyPlayed"  class="dealedCards"
+            <img id="card_{{i}}" #imgElement *ngIf="!game.dealedCards[i].alreadyPlayed"  class="dealedCards"
             [ngStyle]="addStyleToCards(i)" (click)="takeCard(imgElement, i)" [src]='img.source' alt="">
         </ng-container>
         
