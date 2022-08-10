@@ -121,13 +121,14 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   setInfobox() {
-    if(this.game.players.length >= 2) {
+    if (this.game.players.length > 1) {
       this.infoCardTitle = 'Pick a card! :)'
       this.infoCardDescription = 'Have fun!'
     } else {
       this.infoCardTitle = 'Add players!'
       this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
     }
+    this.updateInfobox();
   }
 
   takeCard(imgElement, i) {
@@ -152,7 +153,6 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   startDealing(dealingSpeed) {
-    // dealingSpeed = 250;
     if (this.game.dealingCards.length > 0) {
       let popCard = setInterval(() => {
         if (this.game.dealingCards.length > 0) {
@@ -231,7 +231,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.game.currentCard = "";
     this.updateInfobox();
     this.saveGame();
-        location.reload();
+    location.reload();
   }
 
   saveGame() {
@@ -260,7 +260,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   // adds animation to info card and add-player-button
   pickMorePlayers() {
-    this.infoCardTitle= 'Add players!'
+    this.infoCardTitle = 'Add players!'
     this.infoCardDescription = 'Please add at least two players bofore you pick a card!'
     this.jump = true;
     this.errorInfo = true;

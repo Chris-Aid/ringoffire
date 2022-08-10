@@ -23,10 +23,8 @@ export class GameInfoComponent implements OnInit {
     { title: 'Rule', description: 'Make a rule. Everyone needs to drink when he breaks the rule.' },
   ];
 
-  // @Input() title = '';
-  // @Input() description = '';
   @Input() card: string;
-  @Input() addPlayersTitle;
+  @Input() addPlayersTitle: string;
   @Input() addPlayersInfo: string;
   constructor() { }
 
