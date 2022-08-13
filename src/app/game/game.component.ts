@@ -96,6 +96,7 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   getGameFromFirestore() {
     this.route.params.subscribe((params) => {
+      console.log(params['id'])
       this.myGameId = params['id'];
 
       this.firestore
@@ -136,7 +137,6 @@ export class GameComponent implements OnInit, AfterViewInit {
       if (!this.game.pickCardAnimation) {
         this.game.currentCard = this.game.stack.pop();
         this.turnCardAnimation(imgElement, i);
-        console.log(imgElement)
         this.game.pickCardAnimation = true;
         this.nextPlayer();
 
@@ -167,10 +167,15 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   turnCardAnimation(imgElement, i) {
+
+    let addAnimation = document.getElementById('card_' + i)
+    addAnimation.classList.add('turnCardAnimation');
+    this.game.dealedCards[i].cardTurned = true;
+
     let style = getComputedStyle(imgElement);
     let CardMatrix = style.transform;
     this.getRotationOfMatrix(CardMatrix, i);
-    imgElement.classList.add('turnCardAnimation');
+    // this.saveGame();
 
     setTimeout(() => {
       // this.game.dealedCards.splice(i, 1);
@@ -220,7 +225,7 @@ export class GameComponent implements OnInit, AfterViewInit {
     this.firestore
       .collection('games')
       .doc(this.myGameId)
-      .set({ description: this.infoCardDescription, title: this.infoCardTitle });
+      .update({ description: this.infoCardDescription, title: this.infoCardTitle });
   }
 
   //starts a new game!!
