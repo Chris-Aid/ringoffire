@@ -167,7 +167,6 @@ export class GameComponent implements OnInit, AfterViewInit {
   }
 
   turnCardAnimation(imgElement, i) {
-
     let addAnimation = document.getElementById('card_' + i)
     addAnimation.classList.add('turnCardAnimation');
     this.game.dealedCards[i].cardTurned = true;
